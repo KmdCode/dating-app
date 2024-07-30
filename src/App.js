@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Layouts/Header';
+import Footer from './components/Layouts/Footer';
+import HomePage from './components/Home/HomePage';
+import './index.css'
+import ProfilePage from './components/Profile/ProfilePage';
+/* import DateSetupForm from './components/DateSetup/DateSetupForm';
+import MessagingPage from './components/Messaging/MessagingPage';
+import NotificationsPage from './components/Notifications/NotificationsPage';
+import AdminPanel from './components/Admin/AdminPanel'; */
+// Add imports for other components as needed
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <Header />
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<HomePage/>} />
+            <Route path= "/profile" element ={<ProfilePage/>}/>
+          </Routes>          
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
