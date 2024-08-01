@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import Header from '../Layouts/Header';
+import Footer from '../Layouts/Footer';
 
 const ProfileEditForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    course: '',
     bio: '',
+    interests: '',
+    relationship: '',
   });
 
   const handleChange = (e) => {
@@ -36,22 +40,44 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="bio">Bio</label>
           <textarea
             id="bio"
             name="bio"
             value={formData.bio}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2" htmlFor="course">Course</label>
+          <input
+            type="text"
+            id="course"
+            name="course"
+            value={formData.course}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2" htmlFor="course">Interests</label>
+          <input
+            type="text"
+            id="interests"
+            name="interests"
+            value={formData.interests}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-2" htmlFor="course">Relationship Goals</label>
+          <input
+            type="text"
+            id="relationship"
+            name="course"
+            value={formData.relationship}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />

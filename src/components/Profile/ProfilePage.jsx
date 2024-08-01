@@ -2,7 +2,6 @@ import React from 'react';
 import ProfileHeader from './ProfileHeader';
 import ProfileDetails from './ProfileDetails';
 import PastDates from './PastDates';
-import ProfileEditForm from './ProfileEditForm';
 
 const ProfilePage = () => {
   return (
@@ -10,7 +9,6 @@ const ProfilePage = () => {
       <ProfileHeader />
       <ProfileDetails />
       <PastDates />
-      <ProfileEditForm />
     </div>
   );
 };

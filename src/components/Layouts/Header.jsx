@@ -6,7 +6,7 @@ const Header = () => {
     <header className="bg-gray-800 text-white shadow-md">
       <nav className="container mx-auto p-4 flex justify-between items-center">
         <div className="text-xl font-bold">
-          <Link to="/" className="hover:text-gray-400">Dating App</Link>
+          <Link to="/" className="hover:text-gray-400">SMU Dating App</Link>
         </div>
         <ul className="flex space-x-4">
           <li>
