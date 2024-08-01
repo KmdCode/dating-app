@@ -7,6 +7,7 @@ import './index.css'
 import ProfilePage from './components/Profile/ProfilePage';
 import ProfileEditForm from './components/Profile/ProfileEditForm';
 import DateSetupForm from "./components/DateSetUp/DateSetupForm"
+import DateDetailPage from './components/DateDetails/DateDetailPage';
 /* import DateSetupForm from './components/DateSetup/DateSetupForm';
 import MessagingPage from './components/Messaging/MessagingPage';
 import NotificationsPage from './components/Notifications/NotificationsPage';
@@ -24,6 +25,7 @@ const App = () => {
             <Route path= "/profile" element ={<ProfilePage/>}/>
             <Route path= "/update-profile" element ={<ProfileEditForm/>}/>
             <Route path= "/date-setup" element ={<DateSetupForm/>}/>
+            <Route path="/date/:dateId" element={<DateDetailPage />} />
           </Routes>          
         </main>
         <Footer />

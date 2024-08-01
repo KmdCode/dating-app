@@ -1,32 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import DateListings from './DateListings';
+import React, { useEffect, useState } from 'react';
 import Filters from './Filters';
-import datesData from '../../data/dates.json';
+import DateCard from './DateCard';
 
 const HomePage = () => {
   const [dates, setDates] = useState([]);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    setDates(datesData);
+    // Fetch the dates from the JSON file
+    const fetchDates = async () => {
+      try {
+        const response = await fetch('/date.json');
+        const data = await response.json();
+        setDates(data);
+      } catch (error) {
+        console.error('Error fetching dates:', error);
+      }
+    };
+
+    fetchDates();
   }, []);
 
-  const handleFilterChange = (filters) => {
-    // Apply filters to the date list
-    // This is a simple example, adjust logic as needed
-    const filteredDates = datesData.filter(date => {
-      return (
-        (!filters.location || date.location.includes(filters.location)) &&
-        (!filters.date || date.date === filters.date)
-      );
-    });
-    setDates(filteredDates);
-  };
-
+  const filteredDates = dates.filter((date) =>
+    date.title.toLowerCase().includes(filter.toLowerCase())
+  );
+  
   return (
-    <div>
-      {/* <h1>Find Your Perfect Date</h1> */}
-      <Filters onChange={handleFilterChange} />
-      <DateListings  dates={dates} />
+    <div className="container mx-auto p-4">
+      <Filters filter={filter} onFilterChange={setFilter} />
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+        {filteredDates.map((date) => (
+          <DateCard key={date.id} date={date} />
+        ))}
+      </div>
+      
     </div>
   );
 };
