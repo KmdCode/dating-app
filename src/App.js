@@ -6,6 +6,7 @@ import HomePage from './components/Home/HomePage';
 import './index.css'
 import ProfilePage from './components/Profile/ProfilePage';
 import ProfileEditForm from './components/Profile/ProfileEditForm';
+import DateSetupForm from "./components/DateSetUp/DateSetupForm"
 /* import DateSetupForm from './components/DateSetup/DateSetupForm';
 import MessagingPage from './components/Messaging/MessagingPage';
 import NotificationsPage from './components/Notifications/NotificationsPage';
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/" element={<HomePage/>} />
             <Route path= "/profile" element ={<ProfilePage/>}/>
             <Route path= "/update-profile" element ={<ProfileEditForm/>}/>
+            <Route path= "/date-setup" element ={<DateSetupForm/>}/>
           </Routes>          
         </main>
         <Footer />
