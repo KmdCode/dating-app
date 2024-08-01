@@ -1,5 +1,3 @@
-// src/components/DateDetail/DateDetailPage.js
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DateDetail from './DateDetail';

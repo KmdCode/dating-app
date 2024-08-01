@@ -7,7 +7,6 @@ const HomePage = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    // Fetch the dates from the JSON file
     const fetchDates = async () => {
       try {
         const response = await fetch('/date.json');

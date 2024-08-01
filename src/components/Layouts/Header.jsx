@@ -18,7 +18,7 @@ const Header = () => {
           <li>
             <Link to="/date-setup" className="hover:text-gray-400">Create Date</Link>
           </li>
-          {/* Add more links as needed */}
+          {/*More links to be added */}
         </ul>
       </nav>
     </header>
