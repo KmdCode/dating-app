@@ -5,7 +5,7 @@ const DateSetupForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     age: '',
-    residence: '',
+    residence: [],
     courses: [],
     description: '',
     level: '',
@@ -25,7 +25,23 @@ const DateSetupForm = () => {
     'BDS',
   ];
 
-  const handleCheckboxChange = (e) => {
+  const residence = [
+    'Madeira Isles',
+    'Arebeng 1',
+    'Arebeng 2',
+    'Drie Lilles',
+    'Nurses Home',
+    'Res 1A',
+    'Res 1B',
+    'Res 1C',
+    'Res 2A',
+    'Res 1D',
+    'Res 4B',
+    'Res 5A',
+    'Res 5B',
+  ]
+
+  const handleCheckboxChangeCourses = (e) => {
     const { value, checked } = e.target;
     setFormData((prevState) => {
       if (checked) {
@@ -37,6 +53,23 @@ const DateSetupForm = () => {
         return {
           ...prevState,
           courses: prevState.courses.filter((course) => course !== value),
+        };
+      }
+    });
+  };
+
+  const handleCheckboxChangeResidence = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prevState) => {
+      if (checked) {
+        return {
+          ...prevState,
+          residence: [...prevState.residence, value],
+        };
+      } else {
+        return {
+          ...prevState,
+          residence: prevState.residence.filter((residence) => residence !== value),
         };
       }
     });
@@ -74,13 +107,25 @@ const DateSetupForm = () => {
           value={formData.age}
           onChange={handleChange}
         />
-        <DateFormInput
-          label="Prefered Student Residence"
-          type="text"
-          name="residence"
-          value={formData.residence}
-          onChange={handleChange}
-        />
+        <div className="mb-4 bg-blue-100 border rounded-lg pl-2">
+          <label className="block text-black mb-2">Prefered Student Residence</label>
+          {residence.map((residence) => (
+            <div key={residence} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                id={residence}
+                name="residence"
+                value={residence}
+                checked={formData.residence.includes(residence)}
+                onChange={handleCheckboxChangeResidence}
+                className="form-checkbox h-5 w-5 text-blue-600"
+              />
+              <label htmlFor={residence} className="ml-2 text-gray-700">
+                {residence}
+              </label>
+            </div>
+          ))}
+        </div>
         <div className="mb-4 bg-blue-100 border rounded-lg pl-2">
           <label className="block text-black mb-2">Preferred Courses of Study</label>
           {courses.map((course) => (
@@ -91,7 +136,7 @@ const DateSetupForm = () => {
                 name="courses"
                 value={course}
                 checked={formData.courses.includes(course)}
-                onChange={handleCheckboxChange}
+                onChange={handleCheckboxChangeCourses}
                 className="form-checkbox h-5 w-5 text-blue-600"
               />
               <label htmlFor={course} className="ml-2 text-gray-700">
