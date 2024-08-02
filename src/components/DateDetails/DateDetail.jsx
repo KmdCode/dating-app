@@ -13,8 +13,6 @@ const DateDetail = ({ dateSetup }) => {
       <p><strong>Preferred Level Of Study: </strong> {dateSetup.preferredLevel}</p>
       <p><strong>Interests:</strong> {dateSetup.interests}</p>
       <p><strong>Preferred outcome of the date: </strong> {dateSetup.goal}</p>
-      <p><strong>Special Requirements: </strong> {dateSetup.specialRequirements}</p>
-      <p><strong>Contact Information: </strong> {dateSetup.contactInfo}</p>
       <p><strong>Preferred Courses of Study:</strong> {dateSetup.courses.join(', ')}</p>
       <ApplyButton dateId={dateSetup.id} />
     </div>
