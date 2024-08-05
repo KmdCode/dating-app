@@ -46,23 +46,7 @@ const AppContent = () => {
 const App = () => {
   return (
     <Router>
-<<<<<<< HEAD
-      <div className="app">
-        <Header />
-        <main className="app-main">
-          <Routes>
-            <Route path="/home" element={<HomePage/>} />
-            <Route path= "/profile" element ={<ProfilePage/>}/>
-            <Route path= "/update-profile" element ={<ProfileEditForm/>}/>
-            <Route path= "/date-setup" element ={<DateSetupForm/>}/>
-            <Route path="/date/:dateId" element={<DateDetailPage />} />
-          </Routes>          
-        </main>
-        <Footer />
-      </div>
-=======
       <AppContent />
->>>>>>> dateSetupPage
     </Router>
   );
 };

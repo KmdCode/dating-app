@@ -25,7 +25,7 @@ const ProfileEditForm = () => {
   };
 
   return (
-    <div className="profile-edit-form bg-black shadow-md  p-4 mb-0">
+    <div className="profile-edit-form bg-red-600 shadow-md  p-4 mb-0">
       <h3 className="text-lg text-white font-semibold mb-2">Edit Profile</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -106,7 +106,7 @@ const ProfileEditForm = () => {
         </div>
         <button
           type="submit"
-          className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Save Changes
         </button>

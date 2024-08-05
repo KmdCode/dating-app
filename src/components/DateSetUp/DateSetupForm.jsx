@@ -90,7 +90,7 @@ const DateSetupForm = () => {
   };
 
   return (
-    <div className="date-setup-form mx-auto mt-0 p-4 bg-black shadow-md">
+    <div className="date-setup-form mx-auto mt-0 p-4 bg-red-600 shadow-md">
       <h2 className="text-2xl text-white font-bold mb-4">Create a new date</h2>
       <form onSubmit={handleSubmit}>
         <DateFormInput
@@ -187,7 +187,7 @@ const DateSetupForm = () => {
         
         <button
           type="submit"
-          className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Submit
         </button>

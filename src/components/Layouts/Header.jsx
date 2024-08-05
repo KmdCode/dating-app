@@ -4,7 +4,7 @@ import logo from './logo.png'; // Adjust the path to your logo image
 
 const Header = () => {
   return (
-    <header className="bg-red-600 text-white shadow-md">
+    <header className="bg-black text-white shadow-md">
       <nav className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-16 w-16" />
@@ -14,11 +14,7 @@ const Header = () => {
         </div>
         <ul className="flex space-x-4">
           <li>
-<<<<<<< HEAD
-            <Link to="/home" className="hover:text-gray-400">Home</Link>
-=======
             <Link to="/home" className="hover:text-black">Home</Link>
->>>>>>> dateSetupPage
           </li>
           <li>
             <Link to="/profile" className="hover:text-black">Profile</Link>
