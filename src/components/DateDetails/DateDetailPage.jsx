@@ -36,7 +36,7 @@ const DateDetailPage = () => {
   }
 
   return (
-    <div className="date-detail-page container mx-auto p-4 bg-blue-100 shadow-md rounded-lg mt-3">
+    <div className="date-detail-page mx-auto p-4 bg-black shadow-md mt-0">
       <DateDetail dateSetup={dateSetup} />
     </div>
   );

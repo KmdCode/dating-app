@@ -5,7 +5,7 @@ const Filter = ({ filter, onFilterChange }) => {
     <div className="mb-4">
       <input
         type="text"
-        placeholder="Filter dates by title"
+        placeholder="Search Date By Title"
         value={filter}
         onChange={(e) => onFilterChange(e.target.value)}
         className="border border-gray-300 p-2 rounded-lg w-full"

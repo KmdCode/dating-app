@@ -22,11 +22,11 @@ const HomePage = () => {
   }, []);
 
   const filteredDates = dates.filter((date) =>
-    date.title.toLowerCase().includes(filter.toLowerCase())
+    date.interests.toLowerCase().includes(filter.toLowerCase())
   );
   
   return (
-    <div className="container mx-auto p-4">
+    <div className="bg-black mx-auto p-4">
       <Filters filter={filter} onFilterChange={setFilter} />
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4">
         {filteredDates.map((date) => (

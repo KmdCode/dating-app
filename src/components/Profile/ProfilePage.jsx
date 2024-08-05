@@ -5,7 +5,7 @@ import ProfileDetails from './ProfileDetails';
 
 const ProfilePage = () => {
   return (
-    <div className="profile-page container mx-auto p-4">
+    <div className="profile-page bg-black mx-auto p-4">
       <ProfileHeader />
       <ProfileDetails />
   {/*     <PastDates /> */}

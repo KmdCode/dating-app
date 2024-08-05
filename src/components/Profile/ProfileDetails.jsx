@@ -19,7 +19,7 @@ const ProfileDetails = () => {
   };
 
   return (
-    <div className="profile-details bg-blue-100 shadow-md rounded-lg p-4 mb-4">
+    <div className="profile-details bg-white shadow-md rounded-lg p-4 mb-6">
       <h3 className="text-lg font-semibold mb-2">Profile Details</h3>
       <div className="flex items-center mb-4">
         <div>
@@ -50,14 +50,17 @@ const ProfileDetails = () => {
       <div className="mb-4">
         <h4 className="text-md font-semibold">Social Media</h4>
         <ul>
-          <li><a href={userDetails.socialMedia.facebook} className="text-blue-500 hover:underline">Facebook</a></li>
-          <li><a href={userDetails.socialMedia.twitter} className="text-blue-500 hover:underline">Twitter</a></li>
-          <li><a href={userDetails.socialMedia.instagram} className="text-blue-500 hover:underline">Instagram</a></li>
+          <li><a href={userDetails.socialMedia.facebook} className="text-red-500 hover:underline">Facebook</a></li>
+          <li><a href={userDetails.socialMedia.twitter} className="text-red-500 hover:underline">Twitter</a></li>
+          <li><a href={userDetails.socialMedia.instagram} className="text-red-500 hover:underline">Instagram</a></li>
         </ul>
       </div>
       <div>
-      <Link to="/update-profile" className="self-start bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+      <Link to="/update-profile" className="self-start bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
         Update Profile
+      </Link>
+      <Link to="/" className="self-start bg-red-600 text-white py-2 px-4 ml-2 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        Delete Profile
       </Link>
       </div>
     </div>
