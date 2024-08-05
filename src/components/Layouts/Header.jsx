@@ -9,18 +9,18 @@ const Header = () => {
         <div className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-16 w-16" />
           <div className="text-xl font-bold">
-            <Link to="/home" className="font-edu-hand hover:text-black">Unimate</Link>
+            <Link to="/home" className="font-edu-hand hover:text-red-600">Unimate</Link>
           </div>
         </div>
         <ul className="flex space-x-4">
           <li>
-            <Link to="/home" className="hover:text-black">Home</Link>
+            <Link to="/home" className="hover:text-red-600">Home</Link>
           </li>
           <li>
-            <Link to="/profile" className="hover:text-black">Profile</Link>
+            <Link to="/profile" className="hover:text-red-600">Profile</Link>
           </li>
           <li>
-            <Link to="/date-setup" className="hover:text-black">Create Date</Link>
+            <Link to="/date-setup" className="hover:text-red-600">Create Date</Link>
           </li>
           {/*More links to be added */}
         </ul>

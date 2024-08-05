@@ -9,13 +9,13 @@ const Footer = () => {
         <nav>
           <ul className="flex justify-center space-x-6">
             <li>
-              <Link to="/terms" className="hover:text-black">Terms of Service</Link>
+              <Link to="/terms" className="hover:text-red-600">Terms of Service</Link>
             </li>
             <li>
-              <Link to="/privacy" className="hover:text-black">Privacy Policy</Link>
+              <Link to="/privacy" className="hover:text-red-600">Privacy Policy</Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:text-black">Contact Us</Link>
+              <Link to="/contact" className="hover:text-red-600">Contact Us</Link>
             </li>
           </ul>
         </nav>
