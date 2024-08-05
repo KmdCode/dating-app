@@ -90,8 +90,8 @@ const DateSetupForm = () => {
   };
 
   return (
-    <div className="date-setup-form container mx-auto mt-4 p-4 bg-blue-200 shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Create a new date</h2>
+    <div className="date-setup-form mx-auto mt-0 p-4 bg-black shadow-md">
+      <h2 className="text-2xl text-white font-bold mb-4">Create a new date</h2>
       <form onSubmit={handleSubmit}>
         <DateFormInput
           label="Title"
@@ -107,7 +107,7 @@ const DateSetupForm = () => {
           value={formData.age}
           onChange={handleChange}
         />
-        <div className="mb-4 bg-blue-100 border rounded-lg pl-2">
+        <div className="mb-4 bg-white border rounded-lg pl-2">
           <label className="block text-black mb-2">Prefered Student Residence</label>
           {residence.map((residence) => (
             <div key={residence} className="flex items-center mb-2">
@@ -118,7 +118,7 @@ const DateSetupForm = () => {
                 value={residence}
                 checked={formData.residence.includes(residence)}
                 onChange={handleCheckboxChangeResidence}
-                className="form-checkbox h-5 w-5 text-blue-600"
+                className="form-checkbox h-5 w-5 text-red-600"
               />
               <label htmlFor={residence} className="ml-2 text-gray-700">
                 {residence}
@@ -126,7 +126,7 @@ const DateSetupForm = () => {
             </div>
           ))}
         </div>
-        <div className="mb-4 bg-blue-100 border rounded-lg pl-2">
+        <div className="mb-4 bg-white border rounded-lg pl-2">
           <label className="block text-black mb-2">Preferred Courses of Study</label>
           {courses.map((course) => (
             <div key={course} className="flex items-center mb-2">
@@ -137,7 +137,7 @@ const DateSetupForm = () => {
                 value={course}
                 checked={formData.courses.includes(course)}
                 onChange={handleCheckboxChangeCourses}
-                className="form-checkbox h-5 w-5 text-blue-600"
+                className="form-checkbox h-5 w-5 text-red-600"
               />
               <label htmlFor={course} className="ml-2 text-gray-700">
                 {course}
@@ -155,13 +155,13 @@ const DateSetupForm = () => {
         <DateFormInput
           label="Hobbies and Interests"
           type="text"
-          name="time"
+          name="interests"
           value={formData.interests}
           onChange={handleChange}
         />
         
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="description">
+          <label className="block text-white mb-2" htmlFor="description">
             Describe how you would like your date to be
           </label>
           <textarea
@@ -169,25 +169,25 @@ const DateSetupForm = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2" htmlFor="description">
+          <label className="block text-white mb-2" htmlFor="goal">
             The goal of the date
           </label>
           <textarea
-            id="description"
-            name="description"
+            id="goal"
+            name="goal"
             value={formData.goal}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"
           />
         </div>
         
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Submit
         </button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileHeader = () => {
   return (
-    <div className="profile-header bg-blue-200 text-black p-4 rounded-lg mb-4 flex items-center">
+    <div className="profile-header bg-white text-black p-4 rounded-lg mb-6 flex items-center">
       <img
         src="profile.jpg"
         alt=""
