@@ -21,7 +21,7 @@ const App = () => {
         <Header />
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<HomePage/>} />
+            <Route path="/home" element={<HomePage/>} />
             <Route path= "/profile" element ={<ProfilePage/>}/>
             <Route path= "/update-profile" element ={<ProfileEditForm/>}/>
             <Route path= "/date-setup" element ={<DateSetupForm/>}/>
