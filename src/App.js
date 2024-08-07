@@ -11,6 +11,7 @@ import DateDetailPage from './components/DateDetails/DateDetailPage';
 import LandingPage from './components/Authentication/LandingPage';
 import SignIn from './components/Authentication/Sign-in';
 import SignUp from './components/Authentication/Sign-up';
+import CreateProfile from './components/Authentication/CreateProfile';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /* import DateSetupForm from './components/DateSetup/DateSetupForm';
@@ -21,7 +22,7 @@ import AdminPanel from './components/Admin/AdminPanel'; */
 
 const AppContent = () => {
   const location = useLocation();
-  const isExcludedPage = ['/','/sign-in', '/sign-up'].includes(location.pathname);
+  const isExcludedPage = ['/','/sign-in', '/sign-up', '/create-profile'].includes(location.pathname);
 
   return (
     <div className="app">
@@ -36,6 +37,7 @@ const AppContent = () => {
           <Route path="/date/:dateId" element={<DateDetailPage />} />
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />
+          <Route path="/create-profile" element={<CreateProfile/>} />
         </Routes>
       </main>
       {!isExcludedPage && <Footer />}

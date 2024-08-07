@@ -1,172 +1,30 @@
-import React, { useState } from 'react';
+// src/components/SignIn.js
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 const SignUp = () => {
-    const [preview, setPreview] = useState(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    age:'',
-    residence:'',
-    course: '',
-    bio: '',
-    interests: '',
-    relationship: '',
-    email: '',
-    password: '',
-    level:'',
-    picture: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      picture: file,
-    });
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
-    }
-  };
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="sign-up-form bg-black shadow-md p-8 rounded-lg max-w-md w-full">
-        <div className="text-center mb-6">
-          <img src="ffff2.jpg" alt="Logo" className="mx-auto mb-4 w-24 h-24" />
-          <h1 className="font-edu-hand  text-white text-5xl font-bold mb-4">Unimate</h1>
-          <h3 className="text-lg text-white font-semibold mb-2">Sign Up</h3>
-        </div>
-        <form onSubmit={handleSubmit}>
+    
+    <div className="flex justify-center items-center h-screen bg-black">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
+        <form>
           <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+            <label className="block text-gray-700 mb-2">Email</label>
+            <input type="email" className="w-full px-3 py-2 border rounded-lg" />
           </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Email</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+          <div className="mb-6">
+            <label className="block text-gray-700 mb-2">Password</label>
+            <input type="password" className="w-full px-3 py-2 border rounded-lg" />
           </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Age</label>
-            <input
-              type="text"
-              id="age"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+          <div className="mb-6">
+            <label className="block text-gray-700 mb-2">Confirm Password</label>
+            <input type="password" className="w-full px-3 py-2 border rounded-lg" />
           </div>
+          <Link to="/create-profile"><button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg w-full hover:bg-black">Sign Up</button></Link>
           
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Residence</label>
-            <input
-              type="text"
-              id="residence"
-              name="residence"
-              value={formData.residence}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Course of Study</label>
-            <input
-              type="text"
-              id="course"
-              name="course"
-              value={formData.course}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Level of Study</label>
-            <input
-              type="text"
-              id="level"
-              name="level"
-              value={formData.level}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Interests</label>
-            <input
-              type="text"
-              id="interests"
-              name="interests"
-              value={formData.interests}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Relationship Goals</label>
-            <input
-              type="text"
-              id="relationship"
-              name="relationship"
-              value={formData.relationship}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="picture">Upload Picture</label>
-            <input
-              type="file"
-              id="picture"
-              name="picture"
-              onChange={handleFileChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          {preview && (
-            <div className="mb-4">
-              <img src={preview} alt="Preview" className="mx-auto w-24 h-24 rounded-lg" />
-            </div>
-          )}
-          <Link to="/home" className="self-start bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                 Sign Up
-         </Link>
         </form>
+        <p className="mt-4 text-center">Already have an account? <Link to="/sign-in" className="text-blue-500">Login</Link></p>
       </div>
     </div>
   );
