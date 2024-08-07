@@ -16,12 +16,6 @@ import CreateProfile from './components/Authentication/CreateProfile';
 import TermsOfService from './components/Terms/TermsPage';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-/* import DateSetupForm from './components/DateSetup/DateSetupForm';
-import MessagingPage from './components/Messaging/MessagingPage';
-import NotificationsPage from './components/Notifications/NotificationsPage';
-import AdminPanel from './components/Admin/AdminPanel'; */
-// Add imports for other components as needed
-
 const AppContent = () => {
   const location = useLocation();
   const isExcludedPage = ['/','/sign-in', '/sign-up', '/create-profile'].includes(location.pathname);
