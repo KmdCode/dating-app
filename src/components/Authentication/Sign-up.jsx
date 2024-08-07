@@ -14,7 +14,7 @@ const SignUp = () => {
         <h1 className="font-edu-hand text-white text-5xl font-bold ">Unimate</h1>
       </div>        
     <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-      <h2 className="text-2xl font-semibold mb-4">Sign In</h2>
+      <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
       <form>
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Email</label>
