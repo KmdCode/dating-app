@@ -11,7 +11,9 @@ import DateDetailPage from './components/DateDetails/DateDetailPage';
 import LandingPage from './components/Authentication/LandingPage';
 import SignIn from './components/Authentication/Sign-in';
 import SignUp from './components/Authentication/Sign-up';
+import ContactUs from './components/Contact/ContactUs';
 import CreateProfile from './components/Authentication/CreateProfile';
+import TermsOfService from './components/Terms/TermsPage';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 /* import DateSetupForm from './components/DateSetup/DateSetupForm';
@@ -38,6 +40,8 @@ const AppContent = () => {
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />
           <Route path="/create-profile" element={<CreateProfile/>} />
+          <Route path="/contact" element={<ContactUs/>} />
+          <Route path="/terms" element={<TermsOfService/>} />
         </Routes>
       </main>
       {!isExcludedPage && <Footer />}

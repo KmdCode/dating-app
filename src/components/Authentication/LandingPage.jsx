@@ -14,7 +14,7 @@ const LandingPage = () => {
         </div>
         <div className="flex space-x-4">
           <Link to="/sign-in">
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black">Sign In</button>
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black">Login</button>
           </Link>
           <Link to="/sign-up">
             <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black">Sign Up</button>
