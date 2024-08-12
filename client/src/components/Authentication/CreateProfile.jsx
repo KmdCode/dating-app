@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 const CreateProfile = () => {
-    const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     age:'',
