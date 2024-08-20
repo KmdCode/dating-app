@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 
 dotenv.config({path: './config.env'})
 
-//const DB = process.env.DB.replace('<password>', process.env.DATABASE_PASS)
+const DB = process.env.DB.replace('<password>', process.env.DATABASE_PASS)
 
 mongoose.connect(DB, {
     useNewUrlParser:true,
@@ -14,4 +14,4 @@ mongoose.connect(DB, {
     console.log('DB connection successfull')
 })
 
-module.exports = db;
+module.exports = d;
