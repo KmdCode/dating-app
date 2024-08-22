@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^\d{8}@swave\.smu\.ac\.za$/, 'Please use your SMU provided email address'],
+        match: [/^\d{10}@swave\.smu\.ac\.za$/, 'Please use your SMU provided email address'],
     },
     password:{
         type: String,
@@ -17,8 +17,11 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     otp:{
-        code: String,
-        expiresAt: Date,
+        type: Number,
+        
+    },
+    expiresAt: {
+        type: Date,
     },
     isVerified: {
         type: Boolean,
@@ -26,27 +29,27 @@ const userSchema = new mongoose.Schema({
     },
     userName:{
         type: String,
-        required: [true, 'User name is required']
+        //required: [true, 'User name is required']
     },
     age:{
         type: Number,
-        required: [true, 'Age is required']
+        //required: [true, 'Age is required']
     },
     residence:{
         type: String,
-        required: [true, 'Student residence is required']
+        //required: [true, 'Student residence is required']
     },
     courseOfStudy:{
         type: String,
-        require: [true, 'Course of study is required']
+        //require: [true, 'Course of study is required']
     },
     levelOfStudy:{
         type: String,
-        required: [true, 'Level of study is required']
+        //required: [true, 'Level of study is required']
     },
     relationshipGoals:{
         type: String,
-        required: [true, 'Relationship goal required']
+        //required: [true, 'Relationship goal required']
     },
     role:{
         type: String,

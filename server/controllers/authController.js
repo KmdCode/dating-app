@@ -39,10 +39,9 @@ exports.signUp = async (req, res) =>{
         user = new User({
             email,
             password: hashedPassword,
-            otp: {
-                code: otp,
-                expiresAt: Date.now()+10*60*1000//10 minutes
-            }
+            otp: otp,
+            expiresAt: Date.now()+10*60*1000 //10 minutes
+
         })
     
         await user.save()
@@ -74,12 +73,11 @@ exports.signUp = async (req, res) =>{
     }    
 }
 
-exports.verifyOTP = async (req, res) =>{
+exports.verifyOtp = async (req, res) =>{
     const {email, otp} = req.body
-
+    
     try{
-
-        const user = User.findOne({email})
+        const user = await User.findOne({email})
         if(!user){
             return(
                 res.status(400).json({
@@ -88,8 +86,11 @@ exports.verifyOTP = async (req, res) =>{
             })
             )
         }
+        console.log(`system otp ${user.otp}`)
 
-        if(user.otp.code !== otp || user.otp.expiresAt < Date.now()){
+        if(user.otp !== otp){
+
+            console.log(`user otp ${otp}: system otp ${user.otp}`)
             return(
                 res.status(400).json({
                     status: 'Fail',
@@ -98,7 +99,7 @@ exports.verifyOTP = async (req, res) =>{
             )
         }
 
-        user.otp = undefined;
+        user.otp = null;
         user.isVerified = true;
         await user.save()
 
@@ -108,6 +109,8 @@ exports.verifyOTP = async (req, res) =>{
         })
 
     }catch(err){
+        console.log(err.message)
+
         res.status(500).json({
             status:'fail',
             message: 'Server Error'
