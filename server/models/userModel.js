@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^\d{10}@swave\.smu\.ac\.za$/, 'Please use your SMU provided email address'],
+        match: [/^\d{8,10}@swave\.smu\.ac\.za$/, 'Please use your SMU provided email address'],
     },
     password:{
         type: String,
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    userName:{
+    name:{
         type: String,
         //required: [true, 'User name is required']
     },
@@ -47,6 +47,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         //required: [true, 'Level of study is required']
     },
+    interests:{
+        type: String
+    },
     relationshipGoals:{
         type: String,
         //required: [true, 'Relationship goal required']
@@ -55,6 +58,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['applicant', 'advertiser']
     }
+    
 })
 
 const User = mongoose.model('User', userSchema)
