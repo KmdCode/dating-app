@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         code: String,
         expiresAt: Date,
     },
+    isVerified: {
+        type: Boolean,
+        default: false,
+    },
     userName:{
         type: String,
         required: [true, 'User name is required']

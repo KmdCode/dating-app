@@ -6,7 +6,7 @@ const otpGenerator = require('otp-generator')
 
 dotenv.config({path: './../config/config.env'})
 
-exports.SignUp = async (req, res) =>{
+exports.signUp = async (req, res) =>{
     const {email, password, confirmPassword} = req.body
 
     if(password !== confirmPassword){
@@ -72,4 +72,45 @@ exports.SignUp = async (req, res) =>{
     }catch(err){
         console.log(err.message)
     }    
+}
+
+exports.verifyOTP = async (req, res) =>{
+    const {email, otp} = req.body
+
+    try{
+
+        const user = User.findOne({email})
+        if(!user){
+            return(
+                res.status(400).json({
+                status: 'Fail',
+                message: 'User not found'
+            })
+            )
+        }
+
+        if(user.otp.code !== otp || user.otp.expiresAt < Date.now()){
+            return(
+                res.status(400).json({
+                    status: 'Fail',
+                    message: 'Invalid or Expired OTP'
+                })
+            )
+        }
+
+        user.otp = undefined;
+        user.isVerified = true;
+        await user.save()
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Email verified, please create your profile'
+        })
+
+    }catch(err){
+        res.status(500).json({
+            status:'fail',
+            message: 'Server Error'
+        })
+    }
 }
