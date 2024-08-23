@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 const authRouter = require('./routes/authRouter')
+const userRouter = require('./routes/userRouter')
 
 dotenv.config({path: './config/config.env'})
 const app = express()
@@ -28,7 +29,8 @@ app.get('/', (req, res)=>{
     })
 })
 
-app.use('/api/v1/users', authRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/user', userRouter)
 
 const port = process.env.PORT
 
