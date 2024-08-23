@@ -2,8 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
+const cors = require('cors')
 const authRouter = require('./routes/authRouter')
 const userRouter = require('./routes/userRouter')
+
 
 dotenv.config({path: './config/config.env'})
 const app = express()
@@ -13,6 +15,11 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
 
+app.use(cors({
+    origin:'http://localhost:3000',
+    method: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials:true
+}))
 const DB = process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD)
 
 mongoose.connect(DB, {
@@ -28,7 +35,7 @@ app.get('/', (req, res)=>{
         message: 'connection successful'
     })
 })
-
+app.options('*', cors())
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/user', userRouter)
 

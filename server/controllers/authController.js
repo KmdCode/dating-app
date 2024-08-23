@@ -90,7 +90,7 @@ exports.verifyOtp = async (req, res) =>{
         }
         console.log(`system otp ${user.otp}`)
 
-        if(user.otp !== otp){
+        if(parseInt(user.otp) !== parseInt(otp)){
 
             console.log(`user otp ${otp}: system otp ${user.otp}`)
             return(

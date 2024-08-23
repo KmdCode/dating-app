@@ -14,11 +14,12 @@ import SignUp from './components/Authentication/Sign-up';
 import ContactUs from './components/Contact/ContactUs';
 import CreateProfile from './components/Authentication/CreateProfile';
 import TermsOfService from './components/Terms/TermsPage';
+import OtpVerification from './components/Authentication/OtpVerification';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AppContent = () => {
   const location = useLocation();
-  const isExcludedPage = ['/','/sign-in', '/sign-up', '/create-profile'].includes(location.pathname);
+  const isExcludedPage = ['/','/sign-in', '/sign-up', '/create-profile', '/verifyOtp'].includes(location.pathname);
 
   return (
     <div className="app">
@@ -36,6 +37,7 @@ const AppContent = () => {
           <Route path="/create-profile" element={<CreateProfile/>} />
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/terms" element={<TermsOfService/>} />
+          <Route path="/verify-otp" element={<OtpVerification/>}/>
         </Routes>
       </main>
       {!isExcludedPage && <Footer />}
