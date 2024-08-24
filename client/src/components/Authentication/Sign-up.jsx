@@ -10,7 +10,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
-    // Input validation
+
     if (!email || !password || !confirmPassword) {
       setError('Please fill out all fields.');
       return;
@@ -21,7 +21,7 @@ const SignUpPage = () => {
     }
 
     try {
-      // Send sign-up request to the backend
+
       const response = await axios.post('http://127.0.0.1:8000/api/v1/auth/signup', {
         email,
         password,
@@ -29,7 +29,6 @@ const SignUpPage = () => {
       });
 
       if (response.data.status === 'success') {
-        // If sign-up is successful, navigate to the OTP verification page
         navigate('/verify-otp', { state: { email } });
       } else {
         setError(response.data.message);
