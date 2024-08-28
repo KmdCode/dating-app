@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import InterestsInput from './InterestsInput';
 
 
 const CreateProfile = () => {
@@ -209,17 +210,7 @@ const CreateProfile = () => {
               ))}
             </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Interests</label>
-            <input
-              type="text"
-              id="interests"
-              name="interests"
-              value={formData.interests}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
-          </div>
+          <InterestsInput/>
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="age">Relationship Goals</label>
             <input
