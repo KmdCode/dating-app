@@ -3,44 +3,87 @@ import { Link } from 'react-router-dom';
 
 
 const CreateProfile = () => {
-  const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
-    age:'',
-    residence:'',
-    course: '',
+    age: '',
+    residence: '',
+    courses: '',
     bio: '',
     interests: '',
     relationship: '',
-    level:'',
+    level: '',
     picture: '',
+    role: '',
   });
+
+  const role = ['Applicant', 'Advertiser']
+
+  const residence = [
+    'Madeira Isles',
+    'Arebeng',
+    'Drie Lilies',
+    'Campus Res',
+  ]
+
+  const courses = [
+    'BSc Life Sciences',
+    'BSc Mathematical Sciences',
+    'CSIT',
+    'MBChB',
+    'BOH',
+    'BDT',
+    'BDS'
+  ]
+
+  const level = [
+    '1st Year',
+    '2nd Year',
+    '3rd Year',
+    '4th Year',
+    '5th Year',
+    '6th Year',
+  ]
+
+  const handleRoleChange = (e) =>{
+    setFormData({...formData, role: e.target.value})
+  }
+
+  const handleResidenceChange = (e) => {
+    setFormData({ ...formData, residence: e.target.value })
+  }
+
+  const handleCoursesChange = (e) => {
+    setFormData({ ...formData, courses: e.target.value })
+  }
+
+  const handleLevelChange = (e) => {
+    setFormData({...formData, level: e.target.value})
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value, });
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      picture: file,
-    });
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
-    }
-  };
+
+  /*   const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      setFormData({
+        ...formData,
+        picture: file,
+      });
+  
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setPreview(null);
+      }
+    }; */
 
 
   const handleSubmit = (e) => {
@@ -79,39 +122,92 @@ const CreateProfile = () => {
               className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
           </div>
-          
+          <div className="mb-4">
+            <label className="block text-white mb-2" htmlFor="age">Role</label>
+            <div className='w-full p-3 text-lg border bg-white border-gray-300 rounded-lg'>
+              {role.map((rol) => (
+                <div key={rol} className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    id={rol}
+                    name="role"
+                    value={rol}
+                    checked={formData.role === rol}
+                    onChange={handleRoleChange}
+                    className="form-radio h-5 w-5 text-red-600"
+                  />
+                  <label htmlFor={rol} className="ml-2 text-gray-700">
+                    {rol}
+                  </label>
+                </div>
+              ))}
+            </div>
+            
+          </div>
+
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="age">Residence</label>
-            <input
-              type="text"
-              id="residence"
-              name="residence"
-              value={formData.residence}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+            <div w-full className = "p-3 text-lg border bg-white border-gray-300 rounded-lg">
+              {residence.map((res) => (
+                <div key={res} className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    id={res}
+                    name="residence"
+                    value={res}
+                    checked={formData.residence === res}
+                    onChange={handleResidenceChange}
+                    className="form-radio h-5 w-5 text-red-600"
+                  />
+                  <label htmlFor={res} className="ml-2 text-gray-700">
+                    {res}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="age">Course of Study</label>
-            <input
-              type="text"
-              id="course"
-              name="course"
-              value={formData.course}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+            <div className='w-full p-3 text-lg border bg-white border-gray-300 rounded-lg'>
+              {courses.map((course) => (
+                <div key={course} className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    id={course}
+                    name="courses"
+                    value={course}
+                    checked={formData.courses === course}
+                    onChange={handleCoursesChange}
+                    className="form-radio h-5 w-5 text-red-600"
+                  />
+                  <label htmlFor={course} className="ml-2 text-gray-700">
+                    {course}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Level of Study</label>
-            <input
-              type="text"
-              id="level"
-              name="level"
-              value={formData.level}
-              onChange={handleChange}
-              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-            />
+            <label className="block text-white mb-2" htmlFor="age">Level Of Study</label>
+            <div className='w-full p-3 text-lg border bg-white border-gray-300 rounded-lg'>
+              {level.map((lev) => (
+                <div key={lev} className="flex items-center mb-2">
+                  <input
+                    type="radio"
+                    id={lev}
+                    name="level"
+                    value={lev}
+                    checked={formData.level === lev}
+                    onChange={handleLevelChange}
+                    className="form-radio h-5 w-5 text-red-600"
+                  />
+                  <label htmlFor={lev} className="ml-2 text-gray-700">
+                    {lev}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="age">Interests</label>
@@ -135,7 +231,7 @@ const CreateProfile = () => {
               className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-white mb-2" htmlFor="picture">Upload Picture</label>
             <input
               type="file"
@@ -149,7 +245,7 @@ const CreateProfile = () => {
             <div className="mb-4">
               <img src={preview} alt="Preview" className="mx-auto w-24 h-24 rounded-lg" />
             </div>
-          )}
+          )} */}
           <Link to="/home"><button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg w-full hover:bg-white hover:text-black">Save Profile</button></Link>
         </form>
       </div>
