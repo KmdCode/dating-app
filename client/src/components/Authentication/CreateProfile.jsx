@@ -71,7 +71,7 @@ const CreateProfile = () => {
       const file = e.target.files[0];
       setFormData({
         ...formData,
-        picture: file,
+        picture: file
       });
   
       if (file) {
