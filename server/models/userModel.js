@@ -54,9 +54,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         //required: [true, 'Relationship goal required']
     },
+    bio: {
+        type: String
+    },
     role:{
-        type: String,
-        enum: ['applicant', 'advertiser']
+        type: String
     }
     
 })

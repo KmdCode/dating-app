@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation} from 'react-router-dom';
+import axios from 'axios'
 import InterestsInput from './InterestsInput';
 
 
@@ -10,12 +11,18 @@ const CreateProfile = () => {
     residence: '',
     courses: '',
     bio: '',
-    interests: '',
     relationship: '',
     level: '',
     picture: '',
     role: '',
   });
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const {email} = location.state || {}
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+
 
   const role = ['Applicant', 'Advertiser']
 
@@ -87,11 +94,40 @@ const CreateProfile = () => {
     }; */
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-  };
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
 
+    try{
+
+      const res = await axios.post('http://127.0.0.1:8000/api/v1/user/create-profile', {
+        email,
+        name: formData.name,
+        age: formData.age,
+        residence: formData.residence,
+        course: formData.courses,
+        interests: formData.interests,
+        goals: formData.relationship,
+        role: formData.role,
+        bio: formData.bio,
+        level: formData.level,
+
+      } )
+
+      console.log(email, formData.name, formData.age, formData.residence, formData.courses, formData.interests, 
+        formData.relationship, formData.role, formData.bio, formData.level  )
+
+      if(res.data.status === 'success'){
+        navigate('/home')
+      }else{
+        setError(res.data.message)
+        setMessage('')
+      }
+
+    }catch(err){
+      setError('An error occured while creating the profile')
+      setMessage('')
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="sign-up-form bg-black shadow-md p-8 rounded-lg max-w-md w-full">
@@ -99,6 +135,8 @@ const CreateProfile = () => {
           <img src="logo.png" alt="Logo" className="mx-auto mb-4 w-24 h-24" />
           <h1 className="font-edu-hand  text-white text-5xl font-bold mb-4">Unimate</h1>
           <h3 className="text-lg text-white font-semibold mb-2">Create Profile</h3>
+          {message && <p className="text-red-600 text-center mb-4">{message}</p>}
+          {error && <p className="text-red-600 text-center mb-4">{error}</p>} 
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -119,6 +157,17 @@ const CreateProfile = () => {
               id="age"
               name="age"
               value={formData.age}
+              onChange={handleChange}
+              className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-white mb-2" htmlFor="age">Bio</label>
+            <input
+              type="text"
+              id="bio"
+              name="bio"
+              value={formData.bio}
               onChange={handleChange}
               className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
@@ -237,11 +286,12 @@ const CreateProfile = () => {
               <img src={preview} alt="Preview" className="mx-auto w-24 h-24 rounded-lg" />
             </div>
           )} */}
-          <Link to="/home"><button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg w-full hover:bg-white hover:text-black">Save Profile</button></Link>
+          <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-lg w-full hover:bg-white hover:text-black">Save Profile</button>
         </form>
       </div>
     </div>
   );
-};
+    
+  };
 
 export default CreateProfile;

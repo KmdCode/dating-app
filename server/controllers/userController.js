@@ -1,7 +1,7 @@
 const User = require('./../models/userModel')
 
 exports.createProfile = async (req, res) =>{
-    const {email, name, age, residence, course, level, interests, goals, role} = req.body
+    const {email, name, age, residence, course, level, interests, goals, role, bio} = req.body
 
     try{
         let user = await User.findOne({email})
@@ -32,6 +32,7 @@ exports.createProfile = async (req, res) =>{
         user.interests = interests
         user.relationshipGoals = goals
         user.role = role
+        user.bio = bio
         user.profileCompleted = true
 
         await user.save()

@@ -15,6 +15,7 @@ import ContactUs from './components/Contact/ContactUs';
 import CreateProfile from './components/Authentication/CreateProfile';
 import TermsOfService from './components/Terms/TermsPage';
 import OtpVerification from './components/Authentication/OtpVerification';
+import CreatePro from './components/Authentication/CreatePro';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AppContent = () => {
@@ -34,7 +35,7 @@ const AppContent = () => {
           <Route path="/date/:dateId" element={<DateDetailPage />} />
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />
-          <Route path="/create-profile" element={<CreateProfile/>} />
+          <Route path="/create-profile" element={<CreatePro/>} />
           <Route path="/contact" element={<ContactUs/>} />
           <Route path="/terms" element={<TermsOfService/>} />
           <Route path="/verify-otp" element={<OtpVerification/>}/>
