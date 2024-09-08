@@ -16,6 +16,7 @@ import CreateProfile from './components/Authentication/CreateProfile';
 import TermsOfService from './components/Terms/TermsPage';
 import OtpVerification from './components/Authentication/OtpVerification';
 import CreatePro from './components/Authentication/CreatePro';
+import ProtectedRoute from './components/Authentication/protectedRoute';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AppContent = () => {
@@ -28,16 +29,16 @@ const AppContent = () => {
       <main className="app-main">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/update-profile" element={<ProfileEditForm />} />
-          <Route path="/date-setup" element={<DateSetupForm/>} />
-          <Route path="/date/:dateId" element={<DateDetailPage />} />
+          <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/update-profile" element={<ProtectedRoute><ProfileEditForm /></ProtectedRoute>} />
+          <Route path="/date-setup" element={<ProtectedRoute><DateSetupForm/></ProtectedRoute>} />
+          <Route path="/date/:dateId" element={<ProtectedRoute><DateDetailPage /></ProtectedRoute>} />
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />
           <Route path="/create-profile" element={<CreatePro/>} />
-          <Route path="/contact" element={<ContactUs/>} />
-          <Route path="/terms" element={<TermsOfService/>} />
+          <Route path="/contact" element={<ProtectedRoute><ContactUs/></ProtectedRoute>} />
+          <Route path="/terms" element={<ProtectedRoute><TermsOfService/></ProtectedRoute>} />
           <Route path="/verify-otp" element={<OtpVerification/>}/>
         </Routes>
       </main>

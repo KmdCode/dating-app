@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import logo from './logo.png'; // Adjust the path to your logo image
 
 const Header = () => {
+
+  const handleLogout = () =>{
+    localStorage.removeItem('token')
+    window.location.href = '/'
+  }
+
   return (
     <header className="bg-black text-white shadow-md">
       <nav className="container mx-auto p-4 flex justify-between items-center">
@@ -22,7 +28,9 @@ const Header = () => {
           <li>
             <Link to="/date-setup" className="hover:text-red-600">Create Date</Link>
           </li>
-          {/*More links to be added */}
+          <li>
+          <button onClick={handleLogout} className="self-start bg-red-600 text-white py-2 px-4 ml-2 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Logout</button>
+          </li>
         </ul>
       </nav>
     </header>

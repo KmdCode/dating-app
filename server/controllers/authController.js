@@ -1,6 +1,7 @@
 const User = require('./../models/userModel')
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv')
+const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const otpGenerator = require('otp-generator')
 
@@ -117,6 +118,63 @@ exports.verifyOtp = async (req, res) =>{
         res.status(500).json({
             status:'fail',
             message: 'Server Error'
+        })
+    }
+}
+
+exports.signIn = async (req, res)=>{
+    const {email, password} = req.body
+    
+    try{
+
+        const user = await User.findOne({email})
+
+        if(user.isVerified === false){
+            console.log('not verified')
+            return res.status(400).json({
+                status: 'Fail',
+                message: 'User not verified'
+            })
+        }
+        if(user.profileCompleted === false){
+            return res.status(400).json({
+                status: 'Fail',
+                message: 'User profile not completed'
+            })
+        }
+
+        if(!user){
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Invalid email or password'
+            })
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if(!isMatch){
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Invalid email or password'
+            })
+        }
+
+        const payload = {
+            id: user._id,
+            email: user.email,
+            age:user.age,
+          }
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:'1h'})
+        
+        res.status(200).json({
+            status: 'success',
+            token,
+        })
+
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Server error'
         })
     }
 }

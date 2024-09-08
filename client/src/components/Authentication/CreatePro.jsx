@@ -70,7 +70,7 @@ const CreatePro = () => {
             })
 
             if(res.data.status === 'success'){
-                navigate('/home')
+                navigate('/sign-in')
             }else{
                 setError(res.data.message)
                 console.log(Error)
