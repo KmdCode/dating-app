@@ -1,4 +1,5 @@
 const User = require('./../models/userModel')
+const asyncHandler = require('express-async-handler');
 
 exports.createProfile = async (req, res) =>{
     const {email, name, age, residence, course, level, interests, goals, role, bio} = req.body
@@ -88,9 +89,9 @@ exports.userProfileInfo = async (req, res) => {
 
 exports.deleteUserProfile = async (req, res) => {
   try {
-    const userId = req.user.id; // Get user ID from the authenticated request
+    const userId = req.user.id; 
 
-    const user = await User.findByIdAndDelete(userId); // Find and delete the user
+    const user = await User.findByIdAndDelete(userId); 
 
     if (!user) {
       return res.status(404).json({
@@ -99,7 +100,7 @@ exports.deleteUserProfile = async (req, res) => {
       });
     }
 
-    res.status(204).json({ // Status 204 means No Content
+    res.status(204).json({ 
       status: 'success',
       message: 'User profile deleted successfully',
     });
@@ -112,3 +113,34 @@ exports.deleteUserProfile = async (req, res) => {
   }
 };
 
+exports.updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.age = req.body.age || user.age;
+    user.residence = req.body.residence || user.residence;
+    user.courseOfStudy = req.body.courseOfStudy || user.courseOfStudy;
+    user.levelOfStudy = req.body.levelOfStudy || user.levelOfStudy;
+    user.interests = req.body.interests || user.interests;
+    user.relationshipGoals = req.body.relationshipGoals || user.relationshipGoals;
+    //user.profilePicture = req.body.profilePicture || user.profilePicture;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      id: updatedUser._id,
+      name: updatedUser.name,
+      age: updatedUser.age,
+      residence: updatedUser.residence,
+      courseOfStudy: updatedUser.courseOfStudy,
+      levelOfStudy: updatedUser.levelOfStudy,
+      interests: updatedUser.interests,
+      relationshipGoals: updatedUser.relationshipGoals,
+      profilePicture: updatedUser.profilePicture,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+}); 

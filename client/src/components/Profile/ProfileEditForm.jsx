@@ -1,115 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const ProfileEditForm = () => {
-  const [formData, setFormData] = useState({
+  const [userData, setUserData] = useState({
     name: '',
-    age:'',
-    residence:'',
-    course: '',
-    bio: '',
+    age: '',
+    residence: '',
+    courseOfStudy: '',
+    levelOfStudy: '',
     interests: '',
-    relationship: '',
+    relationshipGoals: '',
   });
+
+  const [message, setMessage] = useState('');
+
+  
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token'); 
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await axios.get('/api/users/profile', config); 
+        setUserData(data); 
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.put('http://127.0.0.1:8000/api/v1/user/update-profile', userData, config);
+
+      setMessage('Profile updated successfully');
+    } catch (error) {
+      setMessage('Error updating profile');
+      console.error(error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setUserData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
+    }));
   };
 
   return (
-    <div className="profile-edit-form bg-red-600 shadow-md  p-4 mb-0">
-      <h3 className="text-lg text-white font-semibold mb-2">Edit Profile</h3>
+    <div>
+      <h2>Edit Profile</h2>
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="name">Age</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="name">City</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="bio">Bio</label>
-          <textarea
-            id="bio"
-            name="bio"
-            value={formData.bio}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Course</label>
-          <input
-            type="text"
-            id="course"
-            name="course"
-            value={formData.course}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Interests</label>
-          <input
-            type="text"
-            id="interests"
-            name="interests"
-            value={formData.interests}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Relationship Goals</label>
-          <input
-            type="text"
-            id="relationship"
-            name="course"
-            value={formData.relationship}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-        >
-          Save Changes
-        </button>
+        <input type="text" name="name" value={userData.name} onChange={handleChange} placeholder="Name" />
+        <input type="number" name="age" value={userData.age} onChange={handleChange} placeholder="Age" />
+        <input type="text" name="residence" value={userData.residence} onChange={handleChange} placeholder="Residence" />
+        <input type="text" name="courseOfStudy" value={userData.courseOfStudy} onChange={handleChange} placeholder="Course of Study" />
+        <input type="text" name="levelOfStudy" value={userData.levelOfStudy} onChange={handleChange} placeholder="Level of Study" />
+        <input type="text" name="interests" value={userData.interests} onChange={handleChange} placeholder="Interests" />
+        <input type="text" name="relationshipGoals" value={userData.relationshipGoals} onChange={handleChange} placeholder="Relationship Goals" />
+        {/* <input type="file" name="profilePicture" onChange={handleChange} placeholder="Profile Picture" /> */}
+        <button type="submit">Update Profile</button>
       </form>
     </div>
   );

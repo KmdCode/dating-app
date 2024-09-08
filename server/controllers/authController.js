@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const otpGenerator = require('otp-generator')
 
+
 dotenv.config({path: './../config/config.env'})
 
 exports.signUp = async (req, res) =>{

@@ -173,7 +173,7 @@ const CreateProfile = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-white mb-2" htmlFor="age">Role</label>
+            <label className="block text-white mb-2" htmlFor="age">Role(applicant/advertiser)</label>
             <div className='w-full p-3 text-lg border bg-white border-gray-300 rounded-lg'>
               {role.map((rol) => (
                 <div key={rol} className="flex items-center mb-2">
