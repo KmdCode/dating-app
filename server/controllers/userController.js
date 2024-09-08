@@ -120,6 +120,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.age = req.body.age || user.age;
     user.residence = req.body.residence || user.residence;
+    user.bio = req.body.bio || user.bio;
     user.courseOfStudy = req.body.courseOfStudy || user.courseOfStudy;
     user.levelOfStudy = req.body.levelOfStudy || user.levelOfStudy;
     user.interests = req.body.interests || user.interests;

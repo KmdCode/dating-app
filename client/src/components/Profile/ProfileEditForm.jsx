@@ -4,6 +4,7 @@ import axios from 'axios';
 const ProfileEditForm = () => {
   const [userData, setUserData] = useState({
     name: '',
+    bio: '',
     age: '',
     residence: '',
     courseOfStudy: '',
@@ -64,19 +65,93 @@ const ProfileEditForm = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Profile</h2>
+    <div className="profile-edit-form bg-red-600 shadow-md  p-4 mb-0">
+      <h3 className="text-lg text-white font-semibold mb-2">Edit Profile</h3>
       {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" value={userData.name} onChange={handleChange} placeholder="Name" />
-        <input type="number" name="age" value={userData.age} onChange={handleChange} placeholder="Age" />
-        <input type="text" name="residence" value={userData.residence} onChange={handleChange} placeholder="Residence" />
-        <input type="text" name="courseOfStudy" value={userData.courseOfStudy} onChange={handleChange} placeholder="Course of Study" />
-        <input type="text" name="levelOfStudy" value={userData.levelOfStudy} onChange={handleChange} placeholder="Level of Study" />
-        <input type="text" name="interests" value={userData.interests} onChange={handleChange} placeholder="Interests" />
-        <input type="text" name="relationshipGoals" value={userData.relationshipGoals} onChange={handleChange} placeholder="Relationship Goals" />
-        {/* <input type="file" name="profilePicture" onChange={handleChange} placeholder="Profile Picture" /> */}
-        <button type="submit">Update Profile</button>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={userData.name}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="name">Age</label>
+          <input
+            type="text"
+            id="age"
+            name="age"
+            value={userData.age}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="name">Residence</label>
+          <input
+            type="text"
+            id="residence"
+            name="residence"
+            value={userData.residence}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="bio">Bio</label>
+          <input
+            type="text"
+            id="bio"
+            name="bio"
+            value={userData.bio}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="course">Course</label>
+          <input
+            type="text"
+            id="course"
+            name="course"
+            value={userData.course}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="course">Interests</label>
+          <input
+            type="text"
+            id="interests"
+            name="interests"
+            value={userData.interests}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="course">Relationship Goals</label>
+          <input
+            type="text"
+            id="relationshipGoals"
+            name="relationshipGoals"
+            value={userData.relationshipGoals}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Save Changes
+        </button>
       </form>
     </div>
   );
