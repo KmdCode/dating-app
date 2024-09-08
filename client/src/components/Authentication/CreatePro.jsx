@@ -22,6 +22,7 @@ const CreatePro = () => {
     const res = [ 'Madeira Isles', 'Arebeng', 'Campus Res']
     const courses = ['BSc', 'CSIT', 'BOH']
     const roles = ['applicant', 'advertiser']
+    const levels = ['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year', '6th Year']
 
     const handleNameChange = (e) => {
         setName(e.target.value)
