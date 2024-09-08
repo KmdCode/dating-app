@@ -59,7 +59,11 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type: String
-    }
+    },
+    profilePicture: {
+        data: Buffer,
+        contentType: String,
+      }
     
 })
 

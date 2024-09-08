@@ -24,6 +24,14 @@ exports.createProfile = async (req, res) =>{
                 })
             )
         }
+
+        let profilePicture = null;
+        if (req.file) {
+          profilePicture = {
+            data: req.file.buffer, // Store the buffer from multer
+            contentType: req.file.mimetype, // Store the file MIME type
+          };
+        }
         
         user.name = name
         user.age = age
@@ -34,6 +42,7 @@ exports.createProfile = async (req, res) =>{
         user.relationshipGoals = goals
         user.role = role
         user.bio = bio
+        user.profilePicture = profilePicture
         user.profileCompleted = true
 
         await user.save()
@@ -69,6 +78,12 @@ exports.userProfileInfo = async (req, res) => {
     }
 
     console.log(user.name)
+    if (user.profilePicture && user.profilePicture.data) {
+      user.profilePicture = {
+        data: user.profilePicture.data.toString('base64'), // Convert Buffer to Base64 string
+        contentType: user.profilePicture.contentType,
+      };
+    }
 
     res.status(200).json({
       status: 'success',

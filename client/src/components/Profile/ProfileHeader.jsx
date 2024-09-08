@@ -37,15 +37,23 @@ const ProfileHeader = () => {
   if (!userDetails) {
     return <p>No profile details found.</p>;
   }
-
+  
+  const profilePictureUrl = userDetails.profilePicture
+  ? `data:${userDetails.profilePicture.contentType};base64,${userDetails.profilePicture.data}`
+  : null;
 
   return (
     <div className="profile-header bg-white text-black p-4 rounded-lg mb-6 flex items-center">
-      <img
+      {profilePictureUrl ? (
+        <img src={profilePictureUrl} alt="Profile" width={150} height={150} />
+      ) : (
+        <p>No profile picture available</p>
+      )}
+      {/* <img
         src="profile.jpg"
         alt=""
         className="w-36 h-36 rounded-full mr-4"
-      />
+      /> */}
       <div>
         <h2 className="text-xl font-bold">{userDetails.name}</h2>
         <p>{userDetails.bio}</p>
