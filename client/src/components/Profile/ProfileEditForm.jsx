@@ -67,7 +67,6 @@ const ProfileEditForm = () => {
   return (
     <div className="profile-edit-form bg-red-600 shadow-md  p-4 mb-0">
       <h3 className="text-lg text-white font-semibold mb-2">Edit Profile</h3>
-      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="name">Name</label>
@@ -125,6 +124,17 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="course">Level of study eg. 1st, 2nd, 3rd, 4th, 5th, 6th</label>
+          <input
+            type="text"
+            id="levelOfStudy"
+            name="levelOfStudy"
+            value={userData.levelOfStudy}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="course">Interests</label>
           <input
             type="text"
@@ -146,6 +156,7 @@ const ProfileEditForm = () => {
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
+        {message && <p>{message}</p>}
         <button
           type="submit"
           className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

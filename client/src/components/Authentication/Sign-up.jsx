@@ -66,7 +66,7 @@ const SignUpPage = () => {
         </div>
       <button type="submit" onClick={handleSignUp} className="bg-red-600 text-white px-4 py-2 rounded-lg w-full hover:bg-black">Sign Up</button>       
       </div>
-      <p className="mt-4 text-center">Don't have an account? <Link to="/sign-up" className="text-blue-500">Sign up now</Link></p>
+      <p className="mt-4 text-center">Already have an account? <Link to="/sign-in" className="text-blue-500">Sign up now</Link></p>
     </div>
   </div>
 </div>

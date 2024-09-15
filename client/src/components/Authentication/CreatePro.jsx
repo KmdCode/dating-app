@@ -160,15 +160,31 @@ const CreatePro = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="role">Role</label>
-          <input
-            type="text"
-            id="role"
-            name="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-          />
+          <label className="block text-white mb-2">Role</label>
+          <div className="flex">
+            <label className="mr-4 text-white">
+              <input
+                type="radio"
+                name="role"
+                value="applicant"
+                checked={role === 'applicant'}
+                onChange={(e) => setRole(e.target.value)}
+                className="mr-2 text-white"
+              />
+              Applicant
+            </label>
+            <label className=" text-white">
+              <input
+                type="radio"
+                name="role"
+                value="advertiser"
+                checked={role === 'advertiser'}
+                onChange={(e) => setRole(e.target.value)}
+                className="mr-2 text-white"
+              />
+              Advertiser
+            </label>
+          </div>
         </div>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="profilePicture">Profile Picture</label>

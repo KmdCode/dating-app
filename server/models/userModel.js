@@ -59,12 +59,16 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type: String
-    },
+        },
     profilePicture: {
         data: Buffer,
         contentType: String,
-      }
-    
+      },
+    hasCreatedDate: {
+        type: Boolean,
+        default: false // Tracks if an advertiser has created a date
+    }
+      
 })
 
 const User = mongoose.model('User', userSchema)

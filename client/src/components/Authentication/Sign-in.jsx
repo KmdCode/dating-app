@@ -41,7 +41,7 @@ const SignIn = () => {
         <h1 className="font-edu-hand text-white text-5xl font-bold ">Unimate</h1>
       </div>        
     <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-      <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
+      <h2 className="text-2xl font-semibold mb-4">Login</h2>
       {error && <p className="text-red-600 text-center mb-4">{error}</p>} 
       <div>
         <div className="mb-4">

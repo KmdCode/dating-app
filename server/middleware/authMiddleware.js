@@ -22,7 +22,7 @@ exports.protect = async (req, res, next) => {
     });
   }
   
-  console.log("token from middleware:", token)
+  //console.log("token from middleware:", token)
 
   try {
   
