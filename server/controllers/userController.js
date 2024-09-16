@@ -228,3 +228,21 @@ exports.dateInfo = async (req, res) => {
     })
   }
 }
+
+exports.getAllDates = async (req, res) => {
+  try {
+    const dates = await Date.find(); 
+    res.status(200).json({
+      status: 'success',
+      data: {
+        dates,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to fetch dates',
+    });
+  }
+};
