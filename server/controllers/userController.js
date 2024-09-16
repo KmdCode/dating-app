@@ -78,7 +78,7 @@ exports.userProfileInfo = async (req, res) => {
       })
     }
 
-    console.log(user.name)
+    //console.log(user.name)
     if (user.profilePicture && user.profilePicture.data) {
       user.profilePicture = {
         data: user.profilePicture.data.toString('base64'), // Convert Buffer to Base64 string
@@ -176,7 +176,8 @@ exports.createDate = async (req, res) => {
       level,
       interests,
       goal,
-      createdBy: req.user._id
+      createdBy: req.user._id,
+      hasCreatedDate:true
     })
 
     await newDate.save()
@@ -196,4 +197,34 @@ exports.createDate = async (req, res) => {
     })
   }
 
+}
+
+exports.dateInfo = async (req, res) => {
+  try {
+
+    const userId = req.user.id
+
+    const date = await Date.find({createdBy: userId})
+
+    if (!date) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Date not found',
+      })
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        date
+      },
+    })
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      status: 'fail',
+      message: 'Server Error',
+    })
+  }
 }

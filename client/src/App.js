@@ -12,11 +12,11 @@ import LandingPage from './components/Authentication/LandingPage';
 import SignIn from './components/Authentication/Sign-in';
 import SignUp from './components/Authentication/Sign-up';
 import ContactUs from './components/Contact/ContactUs';
-import CreateProfile from './components/Authentication/CreateProfile';
 import TermsOfService from './components/Terms/TermsPage';
 import OtpVerification from './components/Authentication/OtpVerification';
 import CreatePro from './components/Authentication/CreatePro';
 import ProtectedRoute from './components/Authentication/protectedRoute';
+import ViewMyDate from './components/CreatedDate/ViewMyDate';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AppContent = () => {
@@ -33,6 +33,7 @@ const AppContent = () => {
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/update-profile" element={<ProtectedRoute><ProfileEditForm /></ProtectedRoute>} />
           <Route path="/date-setup" element={<ProtectedRoute><DateSetupForm/></ProtectedRoute>} />
+          <Route path="/my-date" element={<ProtectedRoute><ViewMyDate/></ProtectedRoute>} />
           <Route path="/date/:dateId" element={<ProtectedRoute><DateDetailPage /></ProtectedRoute>} />
           <Route path="/sign-in" element={<SignIn/>} />
           <Route path="/sign-up" element={<SignUp/>} />

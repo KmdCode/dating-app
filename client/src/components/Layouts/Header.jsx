@@ -34,12 +34,12 @@ const Header = () => {
 
   const checkDateStatus = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/v1/user/profile', {
+      const response = await axios.get('http://127.0.0.1:8000/api/v1/user/dates', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      if (response.data.data.hasCreatedDate === true) {
+      if (response.data.data.date.length > 0) {
         setHasCreatedDate(true); 
       }
     } catch (err) {
@@ -79,7 +79,7 @@ const Header = () => {
               {!hasCreatedDate ? (
                 <Link to="/date-setup" className="hover:text-red-600">Create Date</Link>
               ) : (
-                <Link to="/my-dates" className="hover:text-red-600">View My Dates</Link>
+                <Link to="/my-date" className="hover:text-red-600">View My Dates</Link>
               )}
             </li>
           )}

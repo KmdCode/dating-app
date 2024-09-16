@@ -33,10 +33,14 @@ const dateSchema = new mongoose.Schema({
         required: true 
     },
     createdBy: { 
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, // Reference to the advertiser
         ref: 'User', 
         required: true 
-    }, // Reference to the advertiser
+    }, 
+    hasCreatedDate: {
+        type: Boolean,
+        default: false // Tracks if an advertiser has created a date
+    }
 });
 
 const Date = mongoose.model('Date', dateSchema);

@@ -64,10 +64,6 @@ const userSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String,
       },
-    hasCreatedDate: {
-        type: Boolean,
-        default: false // Tracks if an advertiser has created a date
-    }
       
 })
 

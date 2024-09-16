@@ -67,7 +67,7 @@ const DateSetupForm = () => {
       });
       if (response.status === 201) {
         alert('Date created successfully!');
-        navigate('/profile'); // Navigate to profile or a different page
+        navigate('/my-date'); // Navigate to profile or a different page
       }
     } catch (error) {
       setError('Failed to create date. Please try again.');
