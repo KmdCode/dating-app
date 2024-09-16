@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ApplyButton from './ApplyButton';
-
 const DateDetail = ({ dateSetup }) => {
   return (
     <div className="date-detail bg-white shadow-md rounded-lg p-4 mb-6">
@@ -12,7 +10,6 @@ const DateDetail = ({ dateSetup }) => {
       <p className='text-black'><strong>Interests:</strong> {dateSetup.interests}</p>
       <p className='text-black'><strong>Preferred outcome of the date: </strong> {dateSetup.goal}</p>
       <p className='text-black'><strong>Preferred Courses of Study:</strong> {dateSetup.courses.join(', ')}</p>
-      <ApplyButton dateId={dateSetup.id} />
     </div>
   );
 };

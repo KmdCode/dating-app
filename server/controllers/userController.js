@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const User = require('./../models/userModel')
 const Date = require('./../models/DateModel')
 const asyncHandler = require('express-async-handler');
@@ -261,6 +262,55 @@ exports.getDateById = async (req, res) => {
       data: {
         date,
       },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Server Error',
+    });
+  }
+};
+
+exports.applyForDate = async (req, res) => {
+  try {
+    const dateId = req.params
+    const userId = req.user.id;  // Assuming req.user is populated with the authenticated user's info
+    const objectId = new mongoose.Types.ObjectId(dateId);
+
+    const date = await Date.findById(objectId);
+    console.log(dateId)
+    console.log(userId)
+
+    if (!date) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Date not found',
+      });
+    }
+
+    console.log(date)
+
+    console.log(dateId)
+    console.log(userId)
+
+    // Check if the user has already applied for this date
+    const alreadyApplied = date.applicants.some((applicant) => applicant.equals(userId));
+
+    if (alreadyApplied) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'You have already applied for this date',
+      });
+    }
+
+    // Add the user to the applicants list
+    date.applicants.push(userId);
+    await date.save();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'You have successfully applied for the date',
     });
   } catch (error) {
     console.error(error);

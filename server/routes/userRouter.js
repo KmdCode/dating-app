@@ -7,7 +7,8 @@ const {
     createDate,
     dateInfo,
     getAllDates,
-    getDateById
+    getDateById,
+    applyForDate
 } = require('./../controllers/userController')
 const {protect} = require('../middleware/authMiddleware')
 const upload = require('../middleware/multerConfig')
@@ -22,6 +23,7 @@ router.route('/dates').post(protect, createDate)
 router.route('/dates').get(protect, dateInfo)
 router.route('/all-dates').get(protect, getAllDates)
 router.route('/date/:id').get(protect, getDateById)
+router.route('/apply/:id').post(protect, applyForDate)
 
 
 module.exports = router
