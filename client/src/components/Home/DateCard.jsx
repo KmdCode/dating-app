@@ -16,7 +16,7 @@ const DateCard = ({ date }) => {
       <p className="text-gray-500 text-sm mb-1"><strong>Interests: </strong>{date.interests}</p>
       <p className="text-gray-500 text-sm mb-4"><strong>Preferred Courses: </strong>{date.courses.join(', ')}</p>
       <div className="mt-auto flex justify-between items-center">
-        <Link to={`/date/${date.id}`}>
+        <Link to={`/date/${date._id}`}>
           <button className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
             View Date
           </button>

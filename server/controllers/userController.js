@@ -246,3 +246,27 @@ exports.getAllDates = async (req, res) => {
     });
   }
 };
+
+exports.getDateById = async (req, res) => {
+  try {
+    const date = await Date.findById(req.params.id);
+    if (!date) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Date not found',
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      data: {
+        date,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Server Error',
+    });
+  }
+};
