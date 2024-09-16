@@ -1,4 +1,5 @@
 const User = require('./../models/userModel')
+const Date = require('./../models/DateModel')
 const asyncHandler = require('express-async-handler');
 
 exports.createProfile = async (req, res) =>{
@@ -160,3 +161,39 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 }); 
+
+exports.createDate = async (req, res) => {
+
+  try{
+
+    const {title, description, age, residence, courses, level, interests, goal} = req.body
+    const newDate = new Date({
+      title,
+      description,
+      age,
+      residence,
+      courses,
+      level,
+      interests,
+      goal,
+      createdBy: req.user._id
+    })
+
+    await newDate.save()
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Date created successfully',
+      date:newDate
+    })
+
+
+  }catch(err){
+    console.log(err)
+    res.status(500).json({
+      status: 'fail',
+      message:'Failed to create date'
+    })
+  }
+
+}

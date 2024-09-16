@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from './logo.png'; // Adjust the path to your logo image
+import logo from './logo.png';
 import axios from 'axios';
 
 const Header = () => {
@@ -8,7 +8,6 @@ const Header = () => {
   const [hasCreatedDate, setHasCreatedDate] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch user's role from local storage or API
   useEffect(() => {
     const token = localStorage.getItem('token');
 
@@ -23,7 +22,6 @@ const Header = () => {
           setRole(userRole);
           console.log(`user role is ${userRole}`)
 
-          // If the user is an advertiser, check if they have already created a date
           if (userRole === 'advertiser') {
             checkDateStatus();
           }
@@ -34,7 +32,6 @@ const Header = () => {
     }
   }, []);
 
-  // Check if the advertiser has already created a date
   const checkDateStatus = async () => {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/v1/user/profile', {
@@ -43,14 +40,13 @@ const Header = () => {
         },
       });
       if (response.data.data.hasCreatedDate === true) {
-        setHasCreatedDate(true); // Advertiser already created a date
+        setHasCreatedDate(true); 
       }
     } catch (err) {
       console.error('Error checking date status:', err);
     }
   };
 
-  // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/');
