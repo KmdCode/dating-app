@@ -33,7 +33,7 @@ const CreatePro = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const formData = new FormData(); // Create a FormData object
+        const formData = new FormData(); 
         formData.append('email', email);
         formData.append('name', name);
         formData.append('age', age);
@@ -46,13 +46,13 @@ const CreatePro = () => {
         formData.append('role', role);
     
         if (profilePicture) {
-          formData.append('profilePicture', profilePicture); // Append the profile picture if available
+          formData.append('profilePicture', profilePicture); 
         }
     
         try {
           const res = await axios.post('http://127.0.0.1:8000/api/v1/user/create-profile', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data', // Ensure the content type is set to multipart/form-data
+              'Content-Type': 'multipart/form-data', 
             },
           });
     

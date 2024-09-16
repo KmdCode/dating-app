@@ -39,7 +39,7 @@ const Header = () => {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      if (response.data.data.date.length > 0) {
+      if (response.data.data.date.hasCreatedDate === true) {
         setHasCreatedDate(true); 
       }
     } catch (err) {
@@ -72,7 +72,7 @@ const Header = () => {
           </li>
           {role === 'applicant' ? (
             <li>
-              <Link to="/applied-dates" className="hover:text-red-600">View Applied Dates</Link>
+              <Link to="/applied-dates" className="hover:text-red-600">Applications</Link>
             </li>
           ) : (
             <li>

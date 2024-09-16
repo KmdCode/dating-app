@@ -18,6 +18,7 @@ import CreatePro from './components/Authentication/CreatePro';
 import ProtectedRoute from './components/Authentication/protectedRoute';
 import ViewMyDate from './components/CreatedDate/ViewMyDate';
 import ApplyPage from './components/DateDetails/ApplyPage';
+import ViewAppliedDates from './components/AppliedDates/ViewAppliedDates';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const AppContent = () => {
@@ -35,6 +36,7 @@ const AppContent = () => {
           <Route path="/update-profile" element={<ProtectedRoute><ProfileEditForm /></ProtectedRoute>} />
           <Route path="/date-setup" element={<ProtectedRoute><DateSetupForm/></ProtectedRoute>} />
           <Route path="/my-date" element={<ProtectedRoute><ViewMyDate/></ProtectedRoute>} />
+          <Route path="/applied-dates" element={<ProtectedRoute><ViewAppliedDates/></ProtectedRoute>} />
           <Route path="/date/:dateId" element={<ProtectedRoute><DateDetailPage /></ProtectedRoute>} />
           <Route path="/apply/:dateId" element={<ProtectedRoute><ApplyPage/></ProtectedRoute>} />
           <Route path="/sign-in" element={<SignIn/>} />

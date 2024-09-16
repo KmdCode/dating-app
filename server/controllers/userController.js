@@ -202,31 +202,21 @@ exports.createDate = async (req, res) => {
 
 exports.dateInfo = async (req, res) => {
   try {
-
-    const userId = req.user.id
-
-    const date = await Date.find({createdBy: userId})
+    const date = await Date.findOne({ createdBy: req.user.id })
+      .populate('applicants', 'name email interests age relationshipGoals courseOfStudy residence bio'); 
 
     if (!date) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Date not found',
-      })
+      return res.status(404).json({ status: 'fail', message: 'No date found for the user.' });
     }
 
     res.status(200).json({
       status: 'success',
       data: {
-        date
+        date,
       },
-    })
-
+    });
   } catch (error) {
-    console.error(error)
-    res.status(500).json({
-      status: 'fail',
-      message: 'Server Error',
-    })
+    res.status(500).json({ status: 'error', message: 'Server error' });
   }
 }
 
@@ -275,7 +265,7 @@ exports.getDateById = async (req, res) => {
 exports.applyForDate = async (req, res) => {
   try {
     const dateId = req.params
-    const userId = req.user.id;  // Assuming req.user is populated with the authenticated user's info
+    const userId = req.user.id;  
     const objectId = new mongoose.Types.ObjectId(dateId);
 
     const date = await Date.findById(objectId);
@@ -294,7 +284,6 @@ exports.applyForDate = async (req, res) => {
     console.log(dateId)
     console.log(userId)
 
-    // Check if the user has already applied for this date
     const alreadyApplied = date.applicants.some((applicant) => applicant.equals(userId));
 
     if (alreadyApplied) {
@@ -304,7 +293,6 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-    // Add the user to the applicants list
     date.applicants.push(userId);
     await date.save();
 
@@ -316,6 +304,33 @@ exports.applyForDate = async (req, res) => {
     console.error(error);
     res.status(500).json({
       status: 'error',
+      message: 'Server Error',
+    });
+  }
+};
+
+exports.viewAppliedDates = async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming the user is authenticated and we have their ID
+
+    // Find dates where the applicant's ID exists in the applicants array
+    const appliedDates = await Date.find({ applicants: userId }).populate('createdBy', 'name');
+
+    if (!appliedDates || appliedDates.length === 0) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'No applied dates found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: appliedDates,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 'fail',
       message: 'Server Error',
     });
   }

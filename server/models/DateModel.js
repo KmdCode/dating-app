@@ -41,7 +41,13 @@ const dateSchema = new mongoose.Schema({
         type: Boolean,
         default: false // Tracks if an advertiser has created a date
     },
-    applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }]
+    applicants: [
+        { 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User', 
+            default: [] 
+        }
+    ]
 
 });
 
