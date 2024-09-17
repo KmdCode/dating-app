@@ -202,8 +202,12 @@ exports.createDate = async (req, res) => {
 
 exports.dateInfo = async (req, res) => {
   try {
+    // Assuming `applicants` is an array of objects with a `user` field that references the User model
     const date = await Date.findOne({ createdBy: req.user.id })
-      .populate('applicants', 'name email interests age relationshipGoals courseOfStudy residence bio'); 
+      .populate({
+        path: 'applicants.user',  // Populate the 'user' field inside the applicants array
+        select: 'name email interests age relationshipGoals courseOfStudy residence bio' // Select the fields to include
+      });
 
     if (!date) {
       return res.status(404).json({ status: 'fail', message: 'No date found for the user.' });
@@ -216,6 +220,7 @@ exports.dateInfo = async (req, res) => {
       },
     });
   } catch (error) {
+    console.error('Error fetching date info:', error);
     res.status(500).json({ status: 'error', message: 'Server error' });
   }
 }
@@ -264,14 +269,17 @@ exports.getDateById = async (req, res) => {
 
 exports.applyForDate = async (req, res) => {
   try {
+
+    
     const dateId = req.params
     const userId = req.user.id;  
     const objectId = new mongoose.Types.ObjectId(dateId);
 
-    const date = await Date.findById(objectId);
-    console.log(dateId)
-    console.log(userId)
+    console.log('dateId:', objectId); // Check if dateId is correct
+    console.log('userId:', userId); // Check if userId is correct
 
+    // Find the date by dateId
+    const date = await Date.findById(objectId);
     if (!date) {
       return res.status(404).json({
         status: 'fail',
@@ -279,13 +287,8 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-    console.log(date)
-
-    console.log(dateId)
-    console.log(userId)
-
-    const alreadyApplied = date.applicants.some((applicant) => applicant.equals(userId));
-
+    // Check if the user has already applied
+    const alreadyApplied = date.applicants.some(applicant => applicant.user.toString() === userId);
     if (alreadyApplied) {
       return res.status(400).json({
         status: 'fail',
@@ -293,17 +296,20 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-    date.applicants.push(userId);
+    // Add the user and default status to the applicants array
+    date.applicants.push({ user: userId, status: 'inprogress' });
+
+    // Save the updated date document
     await date.save();
 
     res.status(200).json({
       status: 'success',
-      message: 'You have successfully applied for the date',
+      message: 'Application successful!',
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      status: 'error',
+      status: 'fail',
       message: 'Server Error',
     });
   }
@@ -314,7 +320,7 @@ exports.viewAppliedDates = async (req, res) => {
     const userId = req.user.id; // Assuming the user is authenticated and we have their ID
 
     // Find dates where the applicant's ID exists in the applicants array
-    const appliedDates = await Date.find({ applicants: userId }).populate('createdBy', 'name');
+    const appliedDates = await Date.find({ 'applicants.user': userId }).populate('createdBy', 'name');
 
     if (!appliedDates || appliedDates.length === 0) {
       return res.status(404).json({
@@ -323,9 +329,21 @@ exports.viewAppliedDates = async (req, res) => {
       });
     }
 
+    // Filter through the applied dates to extract the applicant's status for each date
+    const datesWithStatus = appliedDates.map(date => {
+      const applicantInfo = date.applicants.find(applicant => String(applicant.user) === String(userId));
+      return {
+        dateId: date._id,
+        title: date.title,
+        description: date.description,
+        status: applicantInfo ? applicantInfo.status : 'unknown', // Include the status field for each applicant
+        createdBy: date.createdBy.name, // Date creator's name
+      };
+    });
+
     res.status(200).json({
       status: 'success',
-      data: appliedDates,
+      data: datesWithStatus,
     });
   } catch (error) {
     console.error(error);
