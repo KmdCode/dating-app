@@ -10,6 +10,8 @@ const {
     getDateById,
     applyForDate,
     viewAppliedDates,
+    rejectApplicant,
+    scheduleInterview,
 } = require('./../controllers/userController')
 const {protect} = require('../middleware/authMiddleware')
 const upload = require('../middleware/multerConfig')
@@ -26,5 +28,6 @@ router.route('/all-dates').get(protect, getAllDates)
 router.route('/date/:id').get(protect, getDateById)
 router.route('/apply/:id').post(protect, applyForDate)
 router.route('/applied-dates').get(protect, viewAppliedDates)
-
+router.route('/reject/:dateId/:applicantId').patch(protect, rejectApplicant)
+router.route('/:dateId/schedule-interview/:applicantId').patch(protect, scheduleInterview)
 module.exports = router

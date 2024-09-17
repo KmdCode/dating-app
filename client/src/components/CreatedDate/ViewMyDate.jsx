@@ -5,6 +5,10 @@ const ViewMyDate = () => {
   const [dateInfo, setDateInfo] = useState(null); 
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(null); 
+  const [message, setMessage] = useState('');
+  const [interviewDate, setInterviewDate] = useState(''); 
+  const [interviewLink, setInterviewLink] = useState(''); 
+  const [selectedApplicant, setSelectedApplicant] = useState(null); 
 
   useEffect(() => {
     const fetchDateInfo = async () => {
@@ -29,7 +33,75 @@ const ViewMyDate = () => {
     };
 
     fetchDateInfo();
-  }, []); // Empty dependency array to fetch only once on component mount
+  }, []);
+
+  const handleReject = async (applicantId) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/reject/${dateInfo._id}/${applicantId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,  
+          },
+        }
+      );
+
+      if (response.data.status === 'success') {
+        setMessage('Application Rejected');
+        setDateInfo(prevState => {
+          const updatedApplicants = prevState.applicants.map(applicant =>
+            applicant._id === applicantId ? { ...applicant, status: 'rejected' } : applicant
+          );
+          return { ...prevState, applicants: updatedApplicants };
+        });
+      } else {
+        setError('Failed to reject applicant.');
+      }
+    } catch (err) {
+      console.error('Error rejecting applicant:', err);
+      setError('Error rejecting applicant');
+    }
+  };
+
+  const handleScheduleInterview = async (applicantId) => {
+
+    console.log('Interview Date:', interviewDate);
+console.log('Interview Link:', interviewLink);
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/${dateInfo._id}/schedule-interview/${applicantId}`,
+        {
+          interviewDate,
+          interviewLink
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      
+
+      if (response.data.status === 'success') {
+        setMessage('Interview scheduled successfully');
+        setDateInfo(prevState => {
+          const updatedApplicants = prevState.applicants.map(applicant =>
+            applicant._id === applicantId
+              ? { ...applicant, status: 'interview scheduled' }
+              : applicant
+          );
+          return { ...prevState, applicants: updatedApplicants };
+        });
+      } else {
+        setError('Failed to schedule interview.');
+      }
+    } catch (err) {
+      console.error('Error scheduling interview:', err.response?.data || err.message || err);
+      setError('Error scheduling interview');
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>; 
@@ -73,18 +145,52 @@ const ViewMyDate = () => {
                 <p><strong>Goal: </strong>{applicant.user.relationshipGoals}</p>
                 <p><strong>Course: </strong>{applicant.user.courseOfStudy}</p>
                 <p><strong>Residence: </strong>{applicant.user.residence}</p>
+                {message && <p className="text-green-600">{message}</p>}
+
                 <div className="mt-4 flex space-x-4">
                   <button
                     className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-800"
+                    onClick={() => setSelectedApplicant(applicant._id)} 
                   >
-                    Interview
+                    Schedule Interview
                   </button>
                   <button
                     className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-800"
+                    onClick={() => handleReject(applicant._id)}
                   >
                     Reject
                   </button>
                 </div>
+
+                {/* Render interview form if the applicant is selected */}
+                {selectedApplicant === applicant._id && (
+                  <div className="mt-4">
+                    <label className="block text-black">
+                      Interview Date:
+                      <input
+                        type="datetime-local"
+                        className="block w-full p-2 mt-2 border"
+                        value={interviewDate}
+                        onChange={(e) => setInterviewDate(e.target.value)}
+                      />
+                    </label>
+                    <label className="block text-black mt-4">
+                      Interview Link (Optional):
+                      <input
+                        type="url"
+                        className="block w-full p-2 mt-2 border"
+                        value={interviewLink}
+                        onChange={(e) => setInterviewLink(e.target.value)}
+                      />
+                    </label>
+                    <button
+                      className="bg-green-600 text-white py-2 px-4 mt-4 rounded-lg hover:bg-green-800"
+                      onClick={() => handleScheduleInterview(applicant._id)} 
+                    >
+                      Confirm Interview
+                    </button>
+                  </div>
+                )}
               </li>
             ))}
           </ul>

@@ -10,6 +10,10 @@ const applicantSchema = new mongoose.Schema({
     type: String,
     enum: ['inprogress', 'interview scheduled', 'accepted', 'rejected'],
     default: 'inprogress'
+  },
+  interview: {
+    date: { type: Date }, 
+    link: { type: String }, 
   }
 });
 
@@ -46,17 +50,17 @@ const dateSchema = new mongoose.Schema({
     required: true 
   },
   createdBy: { 
-    type: mongoose.Schema.Types.ObjectId, // Reference to the advertiser
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User', 
     required: true 
   },
   hasCreatedDate: {
     type: Boolean,
-    default: false // Tracks if an advertiser has created a date
+    default: false 
   },
-  applicants: [applicantSchema] // Store applicant's ID and status in an embedded schema
+  applicants: [applicantSchema] 
 });
 
-const Date = mongoose.model('Date', dateSchema);
+const DatingSchema = mongoose.model('Date', dateSchema);
 
-module.exports = Date;
+module.exports = DatingSchema;
