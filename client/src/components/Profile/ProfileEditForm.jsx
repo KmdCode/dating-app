@@ -13,9 +13,9 @@ const ProfileEditForm = () => {
     relationshipGoals: '',
   });
 
+  const [loading, setLoading] = useState(true); // Add a loading state
   const [message, setMessage] = useState('');
 
-  
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -25,10 +25,24 @@ const ProfileEditForm = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await axios.get('/api/users/profile', config); 
-        setUserData(data); 
+        const { data } = await axios.get('http://127.0.0.1:8000/api/v1/user/profile', config); 
+        
+        // Ensure the returned data matches the structure of the form fields
+        setUserData({
+          name: data.name || '',
+          bio: data.bio || '',
+          age: data.age || '',
+          residence: data.residence || '',
+          courseOfStudy: data.courseOfStudy || '',
+          levelOfStudy: data.levelOfStudy || '',
+          interests: data.interests || '',
+          relationshipGoals: data.relationshipGoals || '',
+        });
+        
+        setLoading(false); // Set loading to false once the data is fetched
       } catch (error) {
         console.error('Error fetching user data', error);
+        setLoading(false); // Even on error, stop the loading state
       }
     };
 
@@ -64,8 +78,13 @@ const ProfileEditForm = () => {
     }));
   };
 
+  // Render a loading message or spinner if data is still being fetched
+  if (loading) {
+    return <div className="text-white">Loading...</div>;
+  }
+
   return (
-    <div className="profile-edit-form bg-red-600 shadow-md  p-4 mb-0">
+    <div className="profile-edit-form bg-red-600 shadow-md p-4 mb-0">
       <h3 className="text-lg text-white font-semibold mb-2">Edit Profile</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -80,9 +99,9 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="name">Age</label>
+          <label className="block text-white mb-2" htmlFor="age">Age</label>
           <input
-            type="text"
+            type="number"
             id="age"
             name="age"
             value={userData.age}
@@ -91,7 +110,7 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="name">Residence</label>
+          <label className="block text-white mb-2" htmlFor="residence">Residence</label>
           <input
             type="text"
             id="residence"
@@ -113,7 +132,7 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Course</label>
+          <label className="block text-white mb-2" htmlFor="courseOfStudy">Course</label>
           <input
             type="text"
             id="courseOfStudy"
@@ -124,7 +143,7 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Level of study eg. 1st, 2nd, 3rd, 4th, 5th, 6th</label>
+          <label className="block text-white mb-2" htmlFor="levelOfStudy">Level of Study</label>
           <input
             type="text"
             id="levelOfStudy"
@@ -135,7 +154,7 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Interests</label>
+          <label className="block text-white mb-2" htmlFor="interests">Interests</label>
           <input
             type="text"
             id="interests"
@@ -146,7 +165,7 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="course">Relationship Goals</label>
+          <label className="block text-white mb-2" htmlFor="relationshipGoals">Relationship Goals</label>
           <input
             type="text"
             id="relationshipGoals"
@@ -156,7 +175,7 @@ const ProfileEditForm = () => {
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        {message && <p>{message}</p>}
+        {message && <p className="text-white">{message}</p>}
         <button
           type="submit"
           className="bg-black text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

@@ -43,10 +43,17 @@ const ViewAppliedDates = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {appliedDates.map((date) => (
           <div key={date.dateId} className="bg-white shadow-lg rounded-lg p-4">
-            <h2 className="text-black text-3xl font-bold mb-4">{date.title}</h2> 
-            <p className='text-black'><strong>Description: </strong> {date.description}</p>
-            <p className='text-black'><strong>Status: </strong> {date.status}</p> {/* Show the status */}
+            <h1 className="text-black text-3xl font-bold mb-4">{date.title}</h1> 
             <p className='text-black'><strong>Created By: </strong> {date.createdBy}</p>
+            <p className='text-black'><strong>Description: </strong> {date.description}</p>
+            <p className='text-black'><strong>Prefered level of study: </strong> {date.level}</p>
+            <p className='text-black'><strong>Prefered Courses: </strong> {date.courses.join(', ')}</p>
+            <p className='text-black'><strong>Prefered Residence: </strong> {date.res.join(', ')}</p>
+            <p className='text-black'><strong>Prefered Date Outcome: </strong> {date.goal}</p>
+            <p className='text-black'><strong>Application Status: </strong> {date.status}</p> {/* Show the status */}
+            <p className='text-black'><strong>Interview Date: </strong> {date.interviewDate}</p> {/* Show the status */}
+            <p className='text-black'><strong>Interview Time: </strong> {date.interviewLink}</p> {/* Show the status */}
+
           </div>
         ))}
       </div>

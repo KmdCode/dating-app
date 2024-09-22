@@ -12,7 +12,7 @@ const applicantSchema = new mongoose.Schema({
     default: 'inprogress'
   },
   interview: {
-    date: { type: Date }, 
+    interviewdate: { type: Date }, 
     link: { type: String }, 
   }
 });

@@ -316,7 +316,7 @@ exports.applyForDate = async (req, res) => {
 
 exports.viewAppliedDates = async (req, res) => {
   try {
-    const userId = req.user.id; 
+    const userId = req.user.id;
 
     const appliedDates = await Date.find({ 'applicants.user': userId }).populate('createdBy', 'name');
 
@@ -333,8 +333,14 @@ exports.viewAppliedDates = async (req, res) => {
         dateId: date._id,
         title: date.title,
         description: date.description,
-        status: applicantInfo ? applicantInfo.status : 'unknown', // Include the status field for each applicant
-        createdBy: date.createdBy.name, // Date creator's name
+        status: applicantInfo ? applicantInfo.status : 'unknown', // Applicant's status
+        interviewDate: applicantInfo?.interview?.interviewdate || null, // Include interview date
+        interviewLink: applicantInfo?.interview?.link || null, // Include interview link
+        createdBy: date.createdBy.name,
+        level: date.level,
+        courses: date.courses,
+        res: date.residence,
+        goal: date.goal,
       };
     });
 
@@ -350,6 +356,7 @@ exports.viewAppliedDates = async (req, res) => {
     });
   }
 };
+
 
 exports.rejectApplicant = async (req, res) => {
   try {
@@ -406,8 +413,8 @@ exports.scheduleInterview = async (req, res) => {
     }
 
     applicant.status = 'interview scheduled';
-    applicant.interviewDate = interviewDate;
-    applicant.interviewLink = interviewLink;
+    applicant.interview.interviewdate = interviewDate;
+    applicant.interview.link = interviewLink;
 
     await date.save();
 
@@ -424,3 +431,21 @@ exports.scheduleInterview = async (req, res) => {
     });
   }
 };
+exports.deleteDate = async (req, res) => {
+  const { id } = req.params; 
+
+  try {
+ 
+    const date = await Date.findByIdAndDelete(id);
+
+    if (!date) {
+      return res.status(404).json({ message: 'Date not found' });
+    }
+
+    res.status(200).json({ message: 'Date deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting date:', error);
+    res.status(500).json({ message: 'Server error, unable to delete date' });
+  }
+};
+
