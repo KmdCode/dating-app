@@ -54,7 +54,7 @@ const ApplyPage = () => {
       <button
         onClick={handleApply}
         disabled={loading}
-        className="bg-red-600 text-white py-2 px-4 mt-2 rounded-lg hover:bg-black focus:outline-none focus:ring-2 hover:text-white focus:ring-opacity-50"
+        className="bg-red-600 text-white py-2 px-4 m-2 rounded-lg hover:bg-black focus:outline-none focus:ring-2 hover:text-white focus:ring-opacity-50"
       >
         {loading ? 'Applying...' : 'Confirm Application'}
       </button>
