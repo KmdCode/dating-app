@@ -39,7 +39,7 @@ const dateSchema = new mongoose.Schema({
     required: true 
   },
   level: { 
-    type: String, 
+    type: [String], 
     required: true 
   },
   interests: { 

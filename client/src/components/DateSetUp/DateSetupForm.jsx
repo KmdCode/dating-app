@@ -10,7 +10,7 @@ const DateSetupForm = () => {
     residence: [],
     courses: [],
     description: '',
-    level: '',
+    level: [],
     interests: '',
     goal: '',
   });
@@ -27,6 +27,8 @@ const DateSetupForm = () => {
     'Madeira Isles', 'Arebeng 1', 'Arebeng 2', 'Drie Lilles', 'Nurses Home',
     'Res 1A', 'Res 1B', 'Res 1C', 'Res 2A', 'Res 1D', 'Res 4B', 'Res 5A', 'Res 5B',
   ];
+
+  const level = ['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year', '6th Year']
 
   const handleCheckboxChangeCourses = (e) => {
     const { value, checked } = e.target;
@@ -46,6 +48,17 @@ const DateSetupForm = () => {
         return { ...prevState, residence: [...prevState.residence, value] };
       } else {
         return { ...prevState, residence: prevState.residence.filter((res) => res !== value) };
+      }
+    });
+  };
+
+  const handleCheckboxChangeLevel = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prevState) => {
+      if (checked) {
+        return { ...prevState, level: [...prevState.level, value] };
+      } else {
+        return { ...prevState, level: prevState.level.filter((res) => res !== value) };
       }
     });
   };
@@ -87,7 +100,7 @@ const DateSetupForm = () => {
           onChange={handleChange}
         />
         <DateFormInput
-          label="Preferred age range"
+          label="Preferred Age"
           type="text"
           name="age"
           value={formData.age}
@@ -111,7 +124,7 @@ const DateSetupForm = () => {
           ))}
         </div>
         <div className="mb-4 bg-white border rounded-lg pl-2">
-          <label className="block text-black mb-2">Preferred Courses of Study</label>
+          <label className="block text-black mb-2">Preferred Courses Of Study</label>
           {courses.map((course) => (
             <div key={course} className="flex items-center mb-2">
               <input
@@ -127,13 +140,23 @@ const DateSetupForm = () => {
             </div>
           ))}
         </div>
-        <DateFormInput
-          label="Preferred Level of study"
-          type="text"
-          name="level"
-          value={formData.level}
-          onChange={handleChange}
-        />
+        <div className="mb-4 bg-white border rounded-lg pl-2">
+          <label className="block text-black mb-2">Preferred Level Of Study</label>
+          {level.map((level) => (
+            <div key={level} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                id={level}
+                name="level"
+                value={level}
+                checked={formData.level.includes(level)}
+                onChange={handleCheckboxChangeLevel}
+                className="form-checkbox h-5 w-5 text-red-600"
+              />
+              <label htmlFor={level} className="ml-2 text-gray-700">{level}</label>
+            </div>
+          ))}
+        </div>
         <DateFormInput
           label="Hobbies and Interests"
           type="text"
