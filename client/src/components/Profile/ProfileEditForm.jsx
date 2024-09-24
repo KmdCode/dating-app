@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ProfileEditForm = () => {
@@ -15,6 +16,7 @@ const ProfileEditForm = () => {
 
   const [loading, setLoading] = useState(true); // Add a loading state
   const [message, setMessage] = useState('');
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -39,7 +41,8 @@ const ProfileEditForm = () => {
           relationshipGoals: data.relationshipGoals || '',
         });
         
-        setLoading(false); // Set loading to false once the data is fetched
+        setLoading(false); 
+        
       } catch (error) {
         console.error('Error fetching user data', error);
         setLoading(false); // Even on error, stop the loading state
@@ -64,6 +67,8 @@ const ProfileEditForm = () => {
       const { data } = await axios.put('http://127.0.0.1:8000/api/v1/user/update-profile', userData, config);
 
       setMessage('Profile updated successfully');
+      alert('Profile updated')
+      navigate('/profile')
     } catch (error) {
       setMessage('Error updating profile');
       console.error(error);
@@ -110,17 +115,6 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="residence">Residence</label>
-          <input
-            type="text"
-            id="residence"
-            name="residence"
-            value={userData.residence}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="bio">Bio</label>
           <input
             type="text"
@@ -132,26 +126,59 @@ const ProfileEditForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-white mb-2" htmlFor="courseOfStudy">Course</label>
-          <input
-            type="text"
-            id="courseOfStudy"
-            name="courseOfStudy"
-            value={userData.courseOfStudy}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+          <label className="block text-white mb-2" htmlFor="residence">Residence</label>
+          <div className="flex flex-col space-y-2">
+            {['Madeira Isles', 'Arebeng', 'Res1A', 'Res1B', 'Res1C', 'Res2A', 'Res2B', 'Res5A', 'Res5B'].map((res) => (
+              <label key={res} className="text-white">
+                <input
+                  type="radio"
+                  name="residence"
+                  value={res}
+                  checked={userData.residence === res}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                {res}
+              </label>
+            ))}
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <label className="block text-white mb-2" htmlFor="courseOfStudy">Course of Study</label>
+          <div className="flex flex-col space-y-2">
+            {['Computer Science', 'Mathematics', 'Engineering', 'Medicine', 'Business'].map((course) => (
+              <label key={course} className="text-white">
+                <input
+                  type="radio"
+                  name="courseOfStudy"
+                  value={course}
+                  checked={userData.courseOfStudy === course}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                {course}
+              </label>
+            ))}
+          </div>
         </div>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="levelOfStudy">Level of Study</label>
-          <input
-            type="text"
-            id="levelOfStudy"
-            name="levelOfStudy"
-            value={userData.levelOfStudy}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+          <div className="flex flex-col space-y-2">
+            {['Undergraduate', 'Postgraduate', 'PhD'].map((level) => (
+              <label key={level} className="text-white">
+                <input
+                  type="radio"
+                  name="levelOfStudy"
+                  value={level}
+                  checked={userData.levelOfStudy === level}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                {level}
+              </label>
+            ))}
+          </div>
         </div>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="interests">Interests</label>
