@@ -46,7 +46,7 @@ const ViewAppliedDates = () => {
             <h1 className="text-black text-3xl font-bold mb-4">{date.title}</h1> 
             <p className='text-black'><strong>Created By: </strong> {date.createdBy}</p>
             <p className='text-black'><strong>Description: </strong> {date.description}</p>
-            <p className='text-black'><strong>Prefered level of study: </strong> {date.level}</p>
+            <p className='text-black'><strong>Prefered level of study: </strong> {date.level.join(', ')}</p>
             <p className='text-black'><strong>Prefered Courses: </strong> {date.courses.join(', ')}</p>
             <p className='text-black'><strong>Prefered Residence: </strong> {date.res.join(', ')}</p>
             <p className='text-black'><strong>Prefered Date Outcome: </strong> {date.goal}</p>

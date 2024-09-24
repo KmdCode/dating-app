@@ -449,3 +449,31 @@ exports.deleteDate = async (req, res) => {
   }
 };
 
+exports.acceptApplicant = async (req, res) => {
+  try {
+    const { dateId, applicantId } = req.params;
+
+    const date = await Date.findById(dateId);
+
+    if (!date) {
+      return res.status(404).json({ status: 'fail', message: 'Date not found' });
+    }
+
+    const applicant = date.applicants.id(applicantId);
+
+    if (!applicant) {
+      return res.status(404).json({ status: 'fail', message: 'Applicant not found' });
+    }
+
+    applicant.status = 'accepted';
+    await date.save();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Applicant status updated to accepted',
+    });
+  } catch (error) {
+    console.error('Error updating applicant status:', error);
+    res.status(500).json({ status: 'error', message: 'Server error' });
+  }
+};

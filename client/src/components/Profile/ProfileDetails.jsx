@@ -73,7 +73,7 @@ const ProfileDetails = () => {
       </div>
       <div className="mb-4">
         <h4 className="text-md font-semibold">Level Of Study</h4>
-        <p>{userDetails.levelOfStudy} Year</p>
+        <p>{userDetails.levelOfStudy}</p>
       </div>
       <div className="mb-4">
         <h4 className="text-md font-semibold">Hobbies and Interests</h4>

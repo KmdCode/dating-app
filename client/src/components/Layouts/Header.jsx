@@ -79,14 +79,14 @@ const Header = () => {
               {!hasCreatedDate ? (
                 <Link to="/date-setup" className="hover:text-red-600">Create Date</Link>
               ) : (
-                <Link to="/my-date" className="hover:text-red-600">View My Dates</Link>
+                <Link to="/my-date" className="hover:text-red-600">View My Date</Link>
               )}
             </li>
           )}
           <li>
             <button
               onClick={handleLogout}
-              className="self-start bg-red-600 text-white py-1 px-4 ml-2 rounded-lg hover:bg-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="self-start bg-red-600 text-white py-1 px-4 ml-2 rounded-lg hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
               Logout
             </button>

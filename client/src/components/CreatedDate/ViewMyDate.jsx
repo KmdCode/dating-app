@@ -67,10 +67,39 @@ const ViewMyDate = () => {
     }
   };
 
+  const handleAccept = async (applicantId) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/accept/${dateInfo._id}/${applicantId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,  
+          },
+        }
+      );
+
+      if (response.data.status === 'success') {
+        setMessage('Application Accepted');
+        setDateInfo(prevState => {
+          const updatedApplicants = prevState.applicants.map(applicant =>
+            applicant._id === applicantId ? { ...applicant, status: 'accepted' } : applicant
+          );
+          return { ...prevState, applicants: updatedApplicants };
+        });
+      } else {
+        setError('Failed to accept applicant.');
+      }
+    } catch (err) {
+      console.error('Error accepting applicant:', err);
+      setError('Error accept applicant');
+    }
+  };
+
   const handleScheduleInterview = async (applicantId) => {
 
     console.log('Interview Date:', interviewDate);
-console.log('Interview Link:', interviewLink);
+    console.log('Interview Link:', interviewLink);
     try {
       const response = await axios.patch(
         `http://127.0.0.1:8000/api/v1/user/${dateInfo._id}/schedule-interview/${applicantId}`,
@@ -146,7 +175,7 @@ console.log('Interview Link:', interviewLink);
           <p className='text-black'><strong>Description: </strong> {dateInfo.description}</p>
           <p className='text-black'><strong>Preferred Age: </strong> {dateInfo.age}</p>
           <p className='text-black'><strong>Preferred Residence: </strong> {dateInfo.residence.join(', ')}</p>
-          <p className='text-black'><strong>Preferred Level Of Study: </strong> {dateInfo.level} year</p>
+          <p className='text-black'><strong>Preferred Level Of Study: </strong> {dateInfo.level.join(', ')} year</p>
           <p className='text-black'><strong>Interests:</strong> {dateInfo.interests}</p>
           <p className='text-black'><strong>Preferred outcome of the date: </strong> {dateInfo.goal}</p>
           <p className='text-black'><strong>Preferred Courses of Study:</strong> {dateInfo.courses.join(', ')}</p>
@@ -177,13 +206,13 @@ console.log('Interview Link:', interviewLink);
         {message && <p className="text-green-600">{message}</p>}
 
         {/* Conditional rendering based on applicant status */}
-        {applicant.status === "rejected" ? null : (
+        {applicant.status === "rejected" || applicant.status === "accepted" ? null : (
           <div className="mt-4 flex space-x-4">
             {applicant.status === "interview scheduled" ? (
               <>
                 <button
                   className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800"
-                  /* onClick={() => handleAccept(applicant._id)} */
+                  onClick={() => handleAccept(applicant._id)} 
                 >
                   Accept
                 </button>
