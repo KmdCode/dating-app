@@ -14,7 +14,7 @@ const ProfileEditForm = () => {
     relationshipGoals: '',
   });
 
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true); 
   const [message, setMessage] = useState('');
   const navigate = useNavigate()
 
@@ -29,7 +29,7 @@ const ProfileEditForm = () => {
         };
         const { data } = await axios.get('http://127.0.0.1:8000/api/v1/user/profile', config); 
         
-        // Ensure the returned data matches the structure of the form fields
+     
         setUserData({
           name: data.name || '',
           bio: data.bio || '',
@@ -45,7 +45,7 @@ const ProfileEditForm = () => {
         
       } catch (error) {
         console.error('Error fetching user data', error);
-        setLoading(false); // Even on error, stop the loading state
+        setLoading(false);
       }
     };
 
@@ -83,7 +83,7 @@ const ProfileEditForm = () => {
     }));
   };
 
-  // Render a loading message or spinner if data is still being fetched
+  
   if (loading) {
     return <div className="text-white">Loading...</div>;
   }
@@ -147,7 +147,7 @@ const ProfileEditForm = () => {
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="courseOfStudy">Course of Study</label>
           <div className="flex flex-col space-y-2">
-            {['Computer Science', 'Mathematics', 'Engineering', 'Medicine', 'Business'].map((course) => (
+            {['BSc Mathematical Sciences', 'BSc Life Sciences', 'BOH', 'BDT', 'BDS', 'BPharm', 'MBChB'].map((course) => (
               <label key={course} className="text-white">
                 <input
                   type="radio"
@@ -165,7 +165,7 @@ const ProfileEditForm = () => {
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="levelOfStudy">Level of Study</label>
           <div className="flex flex-col space-y-2">
-            {['Undergraduate', 'Postgraduate', 'PhD'].map((level) => (
+            {['1st Year', '2nd Year', '3rd Year', 'Honours', 'Masters', 'PhD'].map((level) => (
               <label key={level} className="text-white">
                 <input
                   type="radio"
