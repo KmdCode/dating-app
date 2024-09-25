@@ -39,7 +39,7 @@ const ViewAppliedDates = () => {
 
   return (
     <div className="applied-dates mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Applied Dates</h2>
+      <h2 className="text-2xl font-bold mb-4">Applications</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {appliedDates.map((date) => (
           <div key={date.dateId} className="bg-white shadow-lg rounded-lg p-4">

@@ -2,104 +2,51 @@ const mongoose = require('mongoose');
 const User = require('./../models/userModel')
 const Date = require('./../models/DateModel')
 const asyncHandler = require('express-async-handler');
-
-exports.createProfile = async (req, res) =>{
-    const {email, name, age, residence, course, level, interests, goals, role, bio} = req.body
-
-    try{
-        let user = await User.findOne({email})
-
-        if(!user){
-            return(
-                res.status(404).json({
-                    status:'fail',
-                    message:'user not found'
-                })
-            )
-        }
-    
-        if(!user.isVerified){
-            return(
-                res.status(400).json({
-                    status:'fail',
-                    message:'Email not verified, please verify your email'
-                })
-            )
-        }
-
-        let profilePicture = null;
-        if (req.file) {
-          profilePicture = {
-            data: req.file.buffer, // Store the buffer from multer
-            contentType: req.file.mimetype, // Store the file MIME type
-          };
-        }
-        
-        user.name = name
-        user.age = age
-        user.residence = residence
-        user.courseOfStudy = course
-        user.levelOfStudy = level
-        user.interests = interests
-        user.relationshipGoals = goals
-        user.role = role
-        user.bio = bio
-        user.profilePicture = profilePicture
-        user.profileCompleted = true
-
-        await user.save()
-        
-        res.status(200).json({
-            status:'success',
-            message: 'profile created '
-        })
-
-    }catch(err){
-        return(
-            res.status(500).json({
-                status:'fail',
-                message:'Server error'
-            })
-        )
-    }
-}
+const path = require('path');
+const fs = require('fs');
 
 
 exports.userProfileInfo = async (req, res) => {
   try {
+    const userId = req.user.id;
 
-    const userId = req.user.id
-
-    const user = await User.findById(userId).select('-password')
+    const user = await User.findById(userId).select('-password');
 
     if (!user) {
       return res.status(404).json({
         status: 'fail',
         message: 'User not found',
-      })
+      });
     }
 
-    //console.log(user.name)
-    if (user.profilePicture && user.profilePicture.data) {
-      user.profilePicture = {
-        data: user.profilePicture.data.toString('base64'), // Convert Buffer to Base64 string
-        contentType: user.profilePicture.contentType,
-      };
+  
+    if (user.profilePicture && typeof user.profilePicture === 'string') {
+      const profilePicturePath = path.join(__dirname, '..', 'uploads', 'profile-pictures', user.profilePicture.replace(/^\/+/, ''));
+
+  
+      if (fs.existsSync(profilePicturePath)) {
+      
+        const profilePictureUrl = `${req.protocol}://${req.get('host')}${user.profilePicture}`;
+        user.profilePicture = profilePictureUrl; 
+        console.log("URL :", profilePictureUrl);
+      } else {
+        user.profilePicture = null; 
+      }
     }
 
+  
     res.status(200).json({
       status: 'success',
       data: {
-        user
+        user,
       },
-    })
-
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json({
       status: 'fail',
       message: 'Server Error',
-    })
+    });
   }
 };
 
@@ -274,10 +221,10 @@ exports.applyForDate = async (req, res) => {
     const userId = req.user.id;  
     const objectId = new mongoose.Types.ObjectId(dateId);
 
-    console.log('dateId:', objectId); // Check if dateId is correct
-    console.log('userId:', userId); // Check if userId is correct
+    console.log('dateId:', objectId); 
+    console.log('userId:', userId); 
 
-    // Find the date by dateId
+   
     const date = await Date.findById(objectId);
     if (!date) {
       return res.status(404).json({
@@ -286,7 +233,7 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-    // Check if the user has already applied
+  
     const alreadyApplied = date.applicants.some(applicant => applicant.user.toString() === userId);
     if (alreadyApplied) {
       return res.status(400).json({
@@ -295,10 +242,10 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-    // Add the user and default status to the applicants array
+   
     date.applicants.push({ user: userId, status: 'inprogress' });
 
-    // Save the updated date document
+  
     await date.save();
 
     res.status(200).json({

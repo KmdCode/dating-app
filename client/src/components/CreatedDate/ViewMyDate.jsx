@@ -252,18 +252,21 @@ const ViewMyDate = () => {
                 className="block w-full p-2 mt-2 border"
                 value={interviewDate}
                 onChange={(e) => setInterviewDate(e.target.value)}
+                required
               />
             </label>
             <label className="block text-black mt-4">
-              Interview Link (Optional):
+              Interview Link:
               <input
                 type="url"
                 className="block w-full p-2 mt-2 border"
                 value={interviewLink}
                 onChange={(e) => setInterviewLink(e.target.value)}
+                required
               />
             </label>
             <button
+            type="button"
               className="bg-green-600 text-white py-2 px-4 mt-4 rounded-lg hover:bg-green-800"
               onClick={() => handleScheduleInterview(applicant._id)}
             >
