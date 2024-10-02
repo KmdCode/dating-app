@@ -155,10 +155,13 @@ exports.dateInfo = async (req, res) => {
       return res.status(404).json({ status: 'fail', message: 'No date found for the user.' });
     }
 
+    const applicantCount = date.applicants.length;
+
     res.status(200).json({
       status: 'success',
       data: {
         date,
+        applicantCount,
       },
     });
   } catch (error) {
@@ -286,8 +289,8 @@ exports.viewAppliedDates = async (req, res) => {
         title: date.title,
         description: date.description,
         status: applicantInfo ? applicantInfo.status : 'unknown', // Applicant's status
-        interviewDate: applicantInfo?.interview?.interviewdate || null, // Include interview date
-        interviewLink: applicantInfo?.interview?.link || null, // Include interview link
+        interviewDate: applicantInfo?.interview?.interviewdate || null, // interview date
+        interviewLink: applicantInfo?.interview?.link || null, // interview link
         createdBy: date.createdBy.name,
         level: date.level,
         courses: date.courses,
@@ -430,8 +433,8 @@ exports.acceptApplicant = async (req, res) => {
 };
 
 exports.toggleLike = async (req, res) => {
-  const { id } = req.params; // Date ID
-  const userId = req.user._id; // Assuming user ID comes from authenticated user
+  const { id } = req.params; 
+  const userId = req.user._id; 
 console.log(id, userId)
   try {
     const date = await Date.findById(id);
@@ -443,10 +446,10 @@ console.log(id, userId)
     const isLiked = date.likes.includes(userId);
 
     if (isLiked) {
-      // Unlike: remove user from the likes array
+      
       date.likes = date.likes.filter((likeId) => likeId.toString() !== userId.toString());
     } else {
-      // Like: add user to the likes array
+      
       date.likes.push(userId);
     }
     console.log("liked")

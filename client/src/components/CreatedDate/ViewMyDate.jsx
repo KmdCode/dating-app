@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const ViewMyDate = () => {
   const [dateInfo, setDateInfo] = useState(null); 
+  const [numApplicants, setNumApplicants] = useState(0)
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(null); 
   const [message, setMessage] = useState('');
@@ -24,6 +25,7 @@ const ViewMyDate = () => {
 
         if (response.data && response.data.data && response.data.data.date) {
           setDateInfo(response.data.data.date);
+          setNumApplicants(response.data.data.applicantCount)
         } else {
           setError('No date found for the user.');
         }
@@ -190,7 +192,7 @@ const ViewMyDate = () => {
       )}
 
       <div>
-      <h2 className="p-4 text-black text-3xl font-bold mb-4">Applicants</h2>
+      <h2 className="p-4 text-black text-3xl font-bold mb-4">Applicants {numApplicants}</h2>
 {dateInfo && dateInfo.applicants.length > 0 ? (
   <ul>
     {dateInfo.applicants.map((applicant) => (
