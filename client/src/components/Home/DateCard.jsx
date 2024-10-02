@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const DateCard = ({ date }) => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(date.isLiked || false);
 
-  const toggleLike = () => {
-    setLiked(!liked);
+  const toggleLike = async () => {
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/api/v1/user/${date._id}/like`, {}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Authorization if needed
+        },
+      });
+
+      if (response.status === 200) {
+        setLiked(!liked); // Toggle the like state
+      }
+    } catch (error) {
+      console.error('Error liking the date:', error);
+    }
   };
 
   return (

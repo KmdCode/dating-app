@@ -417,3 +417,34 @@ exports.acceptApplicant = async (req, res) => {
     res.status(500).json({ status: 'error', message: 'Server error' });
   }
 };
+
+exports.toggleLike = async (req, res) => {
+  const { id } = req.params; // Date ID
+  const userId = req.user._id; // Assuming user ID comes from authenticated user
+console.log(id, userId)
+  try {
+    const date = await Date.findById(id);
+
+    if (!date) {
+      return res.status(404).json({ message: 'Date not found' });
+    }
+
+    const isLiked = date.likes.includes(userId);
+
+    if (isLiked) {
+      // Unlike: remove user from the likes array
+      date.likes = date.likes.filter((likeId) => likeId.toString() !== userId.toString());
+    } else {
+      // Like: add user to the likes array
+      date.likes.push(userId);
+    }
+    console.log("liked")
+    await date.save();
+
+    return res.status(200).json({ success: true, likes: date.likes.length, isLiked: !isLiked });
+  } catch (error) {
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+

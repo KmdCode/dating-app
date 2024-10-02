@@ -58,7 +58,11 @@ const dateSchema = new mongoose.Schema({
     type: Boolean,
     default: false 
   },
-  applicants: [applicantSchema] 
+  applicants: [applicantSchema] ,
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }]
 });
 
 const DatingSchema = mongoose.model('Date', dateSchema);

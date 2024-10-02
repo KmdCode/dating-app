@@ -13,6 +13,7 @@ const {
     scheduleInterview,
     deleteDate,
     acceptApplicant,
+    toggleLike
 } = require('./../controllers/userController')
 const {protect} = require('../middleware/authMiddleware')
 
@@ -33,5 +34,6 @@ router.route('/reject/:dateId/:applicantId').patch(protect, rejectApplicant)
 router.route('/:dateId/schedule-interview/:applicantId').patch(protect, scheduleInterview)
 router.route('/delete-date/:id').delete(protect, deleteDate)
 router.route('/accept/:dateId/:applicantId').patch(protect, acceptApplicant)
+router.route('/:id/like').put(protect, toggleLike)
 
 module.exports = router
