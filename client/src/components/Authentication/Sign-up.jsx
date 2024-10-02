@@ -11,12 +11,19 @@ const SignUpPage = () => {
 
   const handleSignUp = async () => {
 
+    const emailRegex = /^\d{8,10}@swave\.smu\.ac\.za$/;
+
     if (!email || !password || !confirmPassword) {
       setError('Please fill out all fields.');
       return;
     }
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setError('Please enter your smu provided email address.');
       return;
     }
 
