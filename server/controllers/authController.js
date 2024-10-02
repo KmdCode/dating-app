@@ -33,25 +33,21 @@ exports.createProfile = async (req, res) => {
 
     let profilePicture = null;
     if (req.file) {
-      const uploadDir = path.join(__dirname, '../uploads/profile-pictures'); // Define the directory for uploads
+      const uploadDir = path.join(__dirname, '../uploads/profile-pictures'); 
 
-      // Ensure the upload directory exists
+
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
 
-      // Define a unique file name for the profile picture
       const fileName = `${user._id}_${Date.now()}${path.extname(req.file.originalname)}`;
       const filePath = path.join(uploadDir, fileName);
 
-      // Write the file to the filesystem
       fs.writeFileSync(filePath, req.file.buffer);
 
-      // Store the file path (relative to the server) in the database
       profilePicture = `/uploads/profile-pictures/${fileName}`;
     }
 
-    // Update the user's profile
     user.name = name;
     user.age = age;
     user.residence = residence;
