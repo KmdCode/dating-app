@@ -127,59 +127,54 @@ const ProfileEditForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="residence">Residence</label>
-          <div className="flex flex-col space-y-2">
+          <select
+            name="residence"
+            value={userData.residence}
+            onChange={handleChange}
+            className="block w-full p-2 bg-white text-black rounded"
+          >
+            <option value="">Select Residence</option> 
             {['Madeira Isles', 'Arebeng', 'Res1A', 'Res1B', 'Res1C', 'Res2A', 'Res2B', 'Res5A', 'Res5B'].map((res) => (
-              <label key={res} className="text-white">
-                <input
-                  type="radio"
-                  name="residence"
-                  value={res}
-                  checked={userData.residence === res}
-                  onChange={handleChange}
-                  className="mr-2"
-                />
+              <option key={res} value={res}>
                 {res}
-              </label>
+              </option>
             ))}
-          </div>
+          </select>
         </div>
         
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="courseOfStudy">Course of Study</label>
-          <div className="flex flex-col space-y-2">
+          <select
+            name="courseOfStudy"
+            value={userData.courseOfStudy}
+            onChange={handleChange}
+            className="block w-full p-2 bg-white text-black rounded"
+          >
+            <option value="">Select Course of Study</option> 
             {['BSc Mathematical Sciences', 'BSc Life Sciences', 'BOH', 'BDT', 'BDS', 'BPharm', 'MBChB'].map((course) => (
-              <label key={course} className="text-white">
-                <input
-                  type="radio"
-                  name="courseOfStudy"
-                  value={course}
-                  checked={userData.courseOfStudy === course}
-                  onChange={handleChange}
-                  className="mr-2"
-                />
+              <option key={course} value={course}>
                 {course}
-              </label>
+              </option>
             ))}
-          </div>
+          </select>
         </div>
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="levelOfStudy">Level of Study</label>
-          <div className="flex flex-col space-y-2">
-            {['1st Year', '2nd Year', '3rd Year', 'Honours', 'Masters', 'PhD'].map((level) => (
-              <label key={level} className="text-white">
-                <input
-                  type="radio"
-                  name="levelOfStudy"
-                  value={level}
-                  checked={userData.levelOfStudy === level}
-                  onChange={handleChange}
-                  className="mr-2"
-                />
+          <select
+            name="levelOfStudy"
+            value={userData.levelOfStudy}
+            onChange={handleChange}
+            className="block w-full p-2 bg-white text-black rounded"
+          >
+            <option value="">Select Level of Study</option>
+            {['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year', '6th Year', 'Honours', 'Masters', 'PhD'].map((level) => (
+              <option key={level} value={level}>
                 {level}
-              </label>
+              </option>
             ))}
-          </div>
+          </select>
         </div>
+
         <div className="mb-4">
           <label className="block text-white mb-2" htmlFor="interests">Interests</label>
           <input
