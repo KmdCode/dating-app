@@ -90,60 +90,50 @@ const CreatePro = () => {
 
         <div className="mb-4">
           <label className="block text-white text-2xl mb-2" htmlFor="residence">Residence</label>
-          <div className="flex flex-col space-y-2">
+          <select
+            id="residence"
+            name="residence"
+            value={residence}
+            onChange={(e) => setResidence(e.target.value)}
+            className="w-full p-2 bg-white text-black rounded-md"
+          >
+            <option value="" disabled>Select your residence</option>
             {['Madeira Isles', 'Arebeng', 'Res1A', 'Res1B', 'Res1C', 'Res2A', 'Res2B', 'Res5A', 'Res5B'].map((res) => (
-              <label key={res} className="text-white">
-                <input
-                  type="radio"
-                  name="residence"
-                  value={res}
-                  checked={residence === res}
-                  onChange={(e) => setResidence(e.target.value)}
-                  className="mr-2"
-                />
-                {res}
-              </label>
+              <option key={res} value={res}>{res}</option>
             ))}
-          </div>
+          </select>
         </div>
 
-
         <div className="mb-4">
-          <label className="block text-white mb-2 text-2xl" htmlFor="course">Course</label>
-          <div className="flex flex-col space-y-2">
+          <label className="block text-white text-2xl mb-2" htmlFor="course">Course</label>
+          <select
+            id="course"
+            name="course"
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
+            className="w-full p-2 bg-white text-black rounded-md"
+          >
+            <option value="" disabled>Select your course</option>
             {['BSc Mathematical Sciences', 'BSc Life Sciences', 'BOH', 'BDT', 'BDS', 'BPharm', 'MBChB'].map((courseOption) => (
-              <label key={courseOption} className="mr-4 text-white">
-                <input
-                  type="radio"
-                  name="course"
-                  value={courseOption}
-                  checked={course === courseOption}
-                  onChange={(e) => setCourse(e.target.value)}
-                  className="mr-2"
-                />
-                {courseOption}
-              </label>
+              <option key={courseOption} value={courseOption}>{courseOption}</option>
             ))}
-          </div>
+          </select>
         </div>
 
         <div className="mb-4">
-          <label className="block text-white mb-2 text-2xl" htmlFor="level">Level of Study</label>
-          <div className="flex flex-col space-y-2">
-            {['1st Year', '2nd Year', '3rd Year', 'Honours', 'Masters', 'PhD'].map((lvl) => (
-              <label key={lvl} className="mr-4 text-white">
-                <input
-                  type="radio"
-                  name="level"
-                  value={lvl}
-                  checked={level === lvl}
-                  onChange={(e) => setLevel(e.target.value)}
-                  className="mr-2"
-                />
-                {lvl}
-              </label>
+          <label className="block text-white text-2xl mb-2" htmlFor="level">Level of Study</label>
+          <select
+            id="level"
+            name="level"
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
+            className="w-full p-2 bg-white text-black rounded-md"
+          >
+            <option value="" disabled>Select your level of study</option>
+            {['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year', '6th Year', 'Honours', 'Masters', 'PhD'].map((lvl) => (
+              <option key={lvl} value={lvl}>{lvl}</option>
             ))}
-          </div>
+          </select>
         </div>
 
         <div className="mb-4">
