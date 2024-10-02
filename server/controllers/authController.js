@@ -134,7 +134,7 @@ exports.signUp = async (req, res) =>{
             from: process.env.EMAIL_ADDRESS,
             to: user.email,
             subject: 'Unimate OTP',
-            text: `Your OTP is ${otp}, this OTP expires in 10 minutes`
+            text: `Your OTP is ${otp}`
         }
     
         sender.sendMail(mailOptions)

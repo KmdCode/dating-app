@@ -58,7 +58,7 @@ const Header = () => {
         <div className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-16 w-16" />
           <div className="text-xl font-bold">
-            <Link to={role === 'applicant' ? '/home' : '/profile'} className="font-edu-hand hover:text-red-600">
+            <Link to={role === 'applicant' ? '/home' : '/home'} className="font-edu-hand hover:text-red-600">
               Unimate
             </Link>
           </div>

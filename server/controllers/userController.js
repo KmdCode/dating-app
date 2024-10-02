@@ -19,15 +19,13 @@ exports.userProfileInfo = async (req, res) => {
     }
 
     if (user.profilePicture && typeof user.profilePicture === 'string') {
-      const profilePicturePath = path.join(__dirname, '..', 'uploads', 'profile-pictures', user.profilePicture.replace(/^\/+/, ''));
-
-  
+      const relativeProfilePicturePath = user.profilePicture.replace(/^\/+/, '');
+      const profilePicturePath = path.join(__dirname, '..', relativeProfilePicturePath);
       if (fs.existsSync(profilePicturePath)) {
-      
-        const profilePictureUrl = `${req.protocol}://${req.get('host')}${user.profilePicture}`;
+        const profilePictureUrl = `${req.protocol}://${req.get('host')}/${relativeProfilePicturePath}`;
         user.profilePicture = profilePictureUrl; 
-        console.log("URL :", profilePictureUrl);
       } else {
+        console.log('Profile picture file does not exist.');
         user.profilePicture = null; 
       }
     }
@@ -39,7 +37,7 @@ exports.userProfileInfo = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching user profile:', error);
     res.status(500).json({
       status: 'fail',
       message: 'Server Error',

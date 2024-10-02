@@ -38,7 +38,7 @@ const ProfileHeader = () => {
   }
 
   const profilePictureUrl = userDetails.profilePicture 
-    ? `http://127.0.0.1:8000/uploads/profile-pictures/${userDetails.profilePicture}`
+    ? `${userDetails.profilePicture}`
     : null;
   console.log("URL : ", profilePictureUrl)
 
