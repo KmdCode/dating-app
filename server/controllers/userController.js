@@ -5,7 +5,6 @@ const asyncHandler = require('express-async-handler');
 const path = require('path');
 const fs = require('fs');
 
-
 exports.userProfileInfo = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -19,7 +18,6 @@ exports.userProfileInfo = async (req, res) => {
       });
     }
 
-  
     if (user.profilePicture && typeof user.profilePicture === 'string') {
       const profilePicturePath = path.join(__dirname, '..', 'uploads', 'profile-pictures', user.profilePicture.replace(/^\/+/, ''));
 
@@ -34,7 +32,6 @@ exports.userProfileInfo = async (req, res) => {
       }
     }
 
-  
     res.status(200).json({
       status: 'success',
       data: {
@@ -49,7 +46,6 @@ exports.userProfileInfo = async (req, res) => {
     });
   }
 };
-
 
 exports.deleteUserProfile = async (req, res) => {
   try {
@@ -215,7 +211,6 @@ exports.getDateById = async (req, res) => {
 
 exports.applyForDate = async (req, res) => {
   try {
-
     
     const dateId = req.params
     const userId = req.user.id;  
@@ -233,7 +228,6 @@ exports.applyForDate = async (req, res) => {
       });
     }
 
-  
     const alreadyApplied = date.applicants.some(applicant => applicant.user.toString() === userId);
     if (alreadyApplied) {
       return res.status(400).json({
@@ -303,7 +297,6 @@ exports.viewAppliedDates = async (req, res) => {
     });
   }
 };
-
 
 exports.rejectApplicant = async (req, res) => {
   try {
