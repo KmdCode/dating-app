@@ -50,9 +50,9 @@ const ViewAppliedDates = () => {
             <p className='text-black'><strong>Prefered Courses: </strong> {date.courses.join(', ')}</p>
             <p className='text-black'><strong>Prefered Residence: </strong> {date.res.join(', ')}</p>
             <p className='text-black'><strong>Prefered Date Outcome: </strong> {date.goal}</p>
-            <p className='text-black'><strong>Application Status: </strong> {date.status}</p> {/* Show the status */}
-            <p className='text-black'><strong>Interview Date: </strong> {date.interviewDate}</p> {/* Show the status */}
-            <p className='text-black'><strong>Interview Time: </strong> {date.interviewLink}</p> {/* Show the status */}
+            <p className='text-black'><strong>Application Status: </strong> {date.status}</p>
+            <p className='text-black'><strong>Interview Date: </strong> {date.interviewDate}</p> 
+            <p className='text-black'><strong>Interview Link: </strong> {date.interviewLink}</p>
 
           </div>
         ))}
