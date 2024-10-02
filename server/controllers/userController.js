@@ -169,11 +169,22 @@ exports.dateInfo = async (req, res) => {
 
 exports.getAllDates = async (req, res) => {
   try {
-    const dates = await Date.find(); 
+    const userId = req.user._id;
+
+    const dates = await Date.find();
+
+    const datesWithLikeStatus = dates.map((date) => {
+      const isLiked = date.likes.includes(userId); 
+      return {
+        ...date.toObject(), 
+        isLiked, 
+      };
+    });
+
     res.status(200).json({
       status: 'success',
       data: {
-        dates,
+        dates: datesWithLikeStatus,
       },
     });
   } catch (error) {
