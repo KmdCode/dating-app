@@ -192,7 +192,7 @@ const ViewMyDate = () => {
       )}
 
       <div>
-      <h2 className="p-4 text-black text-3xl font-bold mb-4">{numApplicants} Applicants</h2>
+      <h2 className="p-4 text-black text-3xl font-bold mb-4">{numApplicants} Applicant(s)</h2>
       {dateInfo && dateInfo.applicants.length > 0 ? (
     <ul>
     {dateInfo.applicants.map((applicant) => (
