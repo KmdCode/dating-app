@@ -23,9 +23,39 @@ sign up with OTP
 ## User profile can be deleted or edited
 ![Screenshot (709)](https://github.com/user-attachments/assets/050404d6-2227-4f5e-9724-dea6e331e1f6)
 
-## Users who signed up as "advertisers can create and manage dates"
+## Users who signed up as "advertisers" can create and manage dates
 ![Screenshot (704)](https://github.com/user-attachments/assets/faa37688-40e5-4056-81e3-031464809014)
 ![Screenshot (706)](https://github.com/user-attachments/assets/0b8deef4-91a0-4d7f-86b5-79349850a987)
 
 Created date
 ![Screenshot (707)](https://github.com/user-attachments/assets/4061b0d9-d4ba-4152-bf32-2463bcd3486e)
+
+## Users who signed up as "applicants" can apply for dates
+![Screenshot (710)](https://github.com/user-attachments/assets/b8b633b4-d437-4c31-b577-4818d60aab01)
+![Screenshot (711)](https://github.com/user-attachments/assets/be0871bc-f0fe-4a4f-90fa-8745578b69db)
+![Screenshot (712)](https://github.com/user-attachments/assets/0a99f412-6512-4fd5-be41-75b7c12301eb)
+
+## Applicants can then view the progress and status of the dates they applied for
+
+This user applied for two dates:
+![Screenshot (713)](https://github.com/user-attachments/assets/75c27635-deba-4617-ba31-b79ef80de78a)
+
+
+## Advertisers can view users who applied for their dates and schedule and online mweeting with them or reject the applicant
+![Screenshot (715)](https://github.com/user-attachments/assets/928c5602-1495-4eaf-940f-c9b4b25a338a)
+![Screenshot (717)](https://github.com/user-attachments/assets/b7a2547f-3fdd-4a99-adb2-62ca9630dedc)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
